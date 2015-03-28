@@ -20,10 +20,10 @@ private:
     Ui::MainWindow *ui;
 
 private slots:
-    void handleButton();
+    void handleButton(int i, int j);
 
 private:
-    QPushButton *m_button;
+    QPushButton *m_button[5][5];
 };
 
 #endif // MAINWINDOW_H
