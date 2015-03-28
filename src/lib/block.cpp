@@ -45,9 +45,9 @@ int Block::getSymbol()
 /**
  * Get array of players on block
  *
- * @return	void**	Pointer to array
+ * @return	Player**	Pointer to array
  */
-void** Block::getPlayers()
+Player** Block::getPlayers()
 {
 	// TODO
 	return NULL;
@@ -82,11 +82,11 @@ void Block::rotateRight()
 /**
  * Place player on block
  *
- * @param	Player	player	Player to be added
+ * @param	Player*	player	Player to be added
  */
-void Block::addPlayer(Player player)
+void Block::addPlayer(Player* player)
 {
-	// TODO
+	_players[player->getColor()] = player;
 }
 
 /**
@@ -96,7 +96,7 @@ void Block::addPlayer(Player player)
  */
 void Block::removePlayer(int playerId)
 {
-	// TODO
+	_players[playerId] = NULL;
 }
 
 

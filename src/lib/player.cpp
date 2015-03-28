@@ -30,7 +30,8 @@ color Player::getColor()
  */
  bool Player::move(int x, int y)
  {
-	 // TODO
+	 _position_x = x;
+	 _position_y = y;
 	 return true;
  }
 

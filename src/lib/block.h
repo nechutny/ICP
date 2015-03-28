@@ -17,7 +17,7 @@ class Block
 		block_type _type;
 		int _rotation;
 		int _symbol;
-		void** _players;
+		Player** _players;
 
 	public:
 		/**
@@ -46,7 +46,7 @@ class Block
 		 *
 		 * @return	void**	Pointer to array
 		 */
-		void** getPlayers();
+		Player** getPlayers();
 
 		/**
 		 * Check, if is any players standing on this block
@@ -68,9 +68,9 @@ class Block
 		/**
 		 * Place player on block
 		 *
-		 * @param	Player	player	Player to be added
+		 * @param	Player*	player	Player to be added
 		 */
-		void addPlayer(Player player);
+		void addPlayer(Player* player);
 
 		/**
 		 * Remove player from block
