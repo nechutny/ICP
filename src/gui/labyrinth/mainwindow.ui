@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>540</width>
-    <height>352</height>
+    <width>328</width>
+    <height>264</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,10 +19,27 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>540</width>
+     <width>328</width>
      <height>25</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuHra">
+    <property name="title">
+     <string>Hra</string>
+    </property>
+    <addaction name="actionNov_s_ov"/>
+    <addaction name="actionNov_lok_ln"/>
+    <addaction name="separator"/>
+    <addaction name="actionUlo_it"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuN_pov_da">
+    <property name="title">
+     <string>Nápověda</string>
+    </property>
+   </widget>
+   <addaction name="menuHra"/>
+   <addaction name="menuN_pov_da"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -33,6 +50,21 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionNov_s_ov">
+   <property name="text">
+    <string>Nová síťová</string>
+   </property>
+  </action>
+  <action name="actionNov_lok_ln">
+   <property name="text">
+    <string>Nová lokální</string>
+   </property>
+  </action>
+  <action name="actionUlo_it">
+   <property name="text">
+    <string>Uložit</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
