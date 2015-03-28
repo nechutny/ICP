@@ -17,7 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
                                         QSize(48, 48)));
 
            // Connect button signal to appropriate slot
-           //connect(m_button[j], SIGNAL(released()), this, SLOT(handleButton(i,j)));
+           connect(m_button[i][j], SIGNAL(released()), this, SLOT(handleButton()));
+
         }
 }
 
@@ -26,10 +27,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::handleButton(int i, int j)
+void MainWindow::handleButton()
 {
+    QPushButton *button = (QPushButton *)sender(); //do button si ulozim ten objekt, ktery zavolal slot
+
     // change the text
-    m_button[i][j]->setText("Example");
-    // resize button
-    m_button[i][j]->resize(100,100);
+    button->setText("Example");
 }

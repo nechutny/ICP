@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[5];
-    char stringdata[30];
+    QByteArrayData data[3];
+    char stringdata[26];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -31,11 +31,9 @@ static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
     {
 QT_MOC_LITERAL(0, 0, 10),
 QT_MOC_LITERAL(1, 11, 12),
-QT_MOC_LITERAL(2, 24, 0),
-QT_MOC_LITERAL(3, 25, 1),
-QT_MOC_LITERAL(4, 27, 1)
+QT_MOC_LITERAL(2, 24, 0)
     },
-    "MainWindow\0handleButton\0\0i\0j\0"
+    "MainWindow\0handleButton\0\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -53,10 +51,10 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    2,   19,    2, 0x08,
+       1,    0,   19,    2, 0x08,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -66,10 +64,11 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     if (_c == QMetaObject::InvokeMetaMethod) {
         MainWindow *_t = static_cast<MainWindow *>(_o);
         switch (_id) {
-        case 0: _t->handleButton((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 0: _t->handleButton(); break;
         default: ;
         }
     }
+    Q_UNUSED(_a);
 }
 
 const QMetaObject MainWindow::staticMetaObject = {

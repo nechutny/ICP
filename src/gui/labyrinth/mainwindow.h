@@ -20,9 +20,9 @@ private:
     Ui::MainWindow *ui;
 
 private slots:
-    void handleButton(int i, int j);
+    void handleButton();
 
-private:
+public:
     QPushButton *m_button[5][5];
 };
 
