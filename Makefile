@@ -1,59 +1,25 @@
 #
 # ICP 2014/2015 Makefie
 #
+CXX = $(shell command -v g++-4.8 >/dev/null 2>&1 && echo -n "g++-4.8" || echo -n "g++")
 
-CC=gcc
-CFLAGS=-O2 -std=c99 -lm -Wall -pedantic -g -rdynamic
-OBJFILES=$(patsubst src/%.cpp, build/%.cpp.o, $(shell ls src/*.c))
-SHELL=bash
+SRC_FOLDER = src
+OBJ_FOLDER = build
 
-# build
-all: cli gui
+CFLAGS = -Wall -Wextra -c --std=c++11
 
-cli: $(OBJFILES)
-	$(CC) $(CFLAGS) build/*.o -o cli
 
-build/%.c.o: src/%.c
-	$(CC) $(CFLAGS) -c $< -o $(subst src/, build/, $<.o)
+LIB_SRCS = $(wildcard $(SRC_FOLDER)/lib/*.cpp)
+LIB_OBJS = $(addprefix $(OBJ_FOLDER)/lib/, $(notdir $(patsubst %.cpp, %.o, $(LIB_SRCS))))
 
-# Clean compiled files
+all: lib
+
+lib: $(LIB_OBJS)
+
+
+$(OBJ_FOLDER)/lib/%.o: $(SRC_FOLDER)/lib/%.cpp
+	@mkdir -p $(OBJ_FOLDER)/lib
+	$(CXX) $(INCLUDES) $(CFLAGS) $< -o $@
+
 clean:
-	rm -rf build/* ifj IFJ.zip tests/*.out.run doc/dokumentace.pdf doc/dokumentace.aux doc/dokumentace.log xlogin.zip
-
-# Commit changes
-commit: clean
-	git commit -a
-	git pull
-	git push
-
-# Create zip file for submitting
-zip:
-	rm -rf tmp
-	mkdir tmp
-	cp src/*.c tmp/
-	cp src/*.h tmp/
-	cp rozsireni tmp/
-	cp rozdeleni tmp/
-	mv tmp/uStack.h tmp/ustack.h
-	for i in tmp/*; do sed -i 's/uStack.h/ustack.h/g' $$i; done
-	echo -e 'all: ifj\n\nifj: *.c\n\tgcc -O2 -std=c99 -lm -Wall -pedantic *.c -o ifj' > tmp/Makefile
-	zip -j xlogin00.zip tmp/*
-	rm -rf tmp
-
-# Test
-tests: ifj $(TESTFILES)
-	# Done
-
-tests/%: tests/%.pas
-	@echo -e "\n"
-	-$(shell valgrind ./ifj $< < $@.stdin > /dev/null 2> $@.valgrind.real; if [ $$(grep "ERROR SUMMARY: 0 errors from 0 contexts" $@.valgrind.real | wc -l) = "1" ]; then rm $@.valgrind.real; else /bin/echo -e "#"; grep "ERROR SUMMARY:" $@.valgrind.real;  fi;  )
-	-$(shell ./ifj $< > $@.stdout.real 2> $@.stderr.real < $@.stdin;echo "$$?" > $@.exit.real;diff $@.stdout.real $@.stdout.correct > /dev/null;if [ "$$?" = "0" ]; then diff $@.stderr.real $@.stderr.correct > /dev/null;if [ "$$?" = "0" ]; then diff $@.exit.real $@.exit.correct > /dev/null; if [ "$$?" = "0" ]; then echo "# OK ... $@"; rm $@.stdout.real $@.stderr.real $@.exit.real; else echo "# ERROR ... $@"; fi; else echo "# ERROR ... $@"; fi; else echo "# ERROR ... $@"; fi)
-
-
-# Documentation
-documentation: doc/dokumentace.tex
-	pdflatex  -output-directory=./doc/ doc/dokumentace.tex
-
-sandwich:
-	-$(shell if [[ $$(whoami) == "root" ]] ; then echo "# Yes, my lord."; else echo "# You are not root!"; fi)
-
+	rm -rf build/*
