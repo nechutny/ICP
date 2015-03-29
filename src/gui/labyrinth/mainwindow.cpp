@@ -52,9 +52,6 @@ MainWindow::MainWindow(QWidget *parent) :
         connect(v_button[i][1], SIGNAL(released()), this, SLOT(handleVShift()));
     }
 
-    //this->label_2->setHeight(8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8);
-    //nemuzu se dostat k labelu a nevim proc!
-    //QLabel *label = this->findChild<QLabel *>("label");
     ui->label->setGeometry(QRect(QPoint(35, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(51, 17)));
     ui->label_2->setGeometry(QRect(QPoint(125, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(51, 17)));
     ui->label_3->setGeometry(QRect(QPoint(205, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(58, 17)));
@@ -71,9 +68,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->rotateR->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20), QSize(48, 24)));
     connect(ui->rotateR, SIGNAL(released()), this, SLOT(handleRotateR()));
+    changeIcon(ui->rotateR, "resources/rotateR.png");
 
     ui->rotateL->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4 + 48 + 4), QSize(48, 24)));
     connect(ui->rotateR, SIGNAL(released()), this, SLOT(handleRotateL()));
+    changeIcon(ui->rotateL, "resources/rotateL.png");
 
     ui->square->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4), QSize(48, 48)));
     ui->square->setPixmap( QPixmap( "resources/square.png"));
@@ -112,4 +111,13 @@ void MainWindow::handleRotateR()
 void MainWindow::handleRotateL()
 {
 
+}
+
+void MainWindow::changeIcon(QPushButton *button, const char* path)
+{
+
+    QPixmap pixmap(path);
+    QIcon ButtonIcon(pixmap);
+    button->setIcon(ButtonIcon);
+    button->setIconSize(pixmap.rect().size());
 }

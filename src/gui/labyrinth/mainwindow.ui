@@ -1096,7 +1096,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>-----&gt;</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="rotateL">
@@ -1109,7 +1109,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>&lt;-----</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="square">

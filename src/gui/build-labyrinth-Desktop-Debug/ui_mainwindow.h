@@ -287,8 +287,8 @@ public:
         scoreRed->setText(QApplication::translate("MainWindow", "0", 0));
         scoreBlue->setText(QApplication::translate("MainWindow", "0", 0));
         card->setText(QApplication::translate("MainWindow", "card", 0));
-        rotateR->setText(QApplication::translate("MainWindow", "----->", 0));
-        rotateL->setText(QApplication::translate("MainWindow", "<-----", 0));
+        rotateR->setText(QString());
+        rotateL->setText(QString());
         square->setText(QApplication::translate("MainWindow", "square", 0));
         menuHra->setTitle(QApplication::translate("MainWindow", "Hra", 0));
         menuN_pov_da->setTitle(QApplication::translate("MainWindow", "N\303\241pov\304\233da", 0));

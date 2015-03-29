@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QPushButton>
 
-#define VELIKOST 5
+#define VELIKOST 11
 
 namespace Ui {
 class MainWindow;
@@ -32,6 +32,8 @@ public:
     QPushButton *m_button[VELIKOST][VELIKOST];
     QPushButton *h_button[VELIKOST/2][1];
     QPushButton *v_button[VELIKOST/2][1];
+
+    void changeIcon(QPushButton *button,const char* path);
 };
 
 #endif // MAINWINDOW_H
