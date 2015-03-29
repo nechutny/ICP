@@ -7,6 +7,66 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    createField();
+
+
+
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::handleButton()
+{
+    QPushButton *button = (QPushButton *)sender(); //do button si ulozim ten objekt, ktery zavolal slot
+
+    // change the text
+    m_button[button->minimumHeight()][button->minimumWidth()]->setText("Exp");
+}
+
+void MainWindow::handleHShift()
+{
+
+}
+
+void MainWindow::handleVShift()
+{
+
+}
+
+void MainWindow::handleRotateR()
+{
+
+}
+
+void MainWindow::handleRotateL()
+{
+
+}
+
+/**
+ * Function for changing image on button
+ * @param button button I want to change
+ * @param path is path to image that will be on the button
+ */
+void MainWindow::changeIcon(QPushButton *button, const char* path)
+{
+
+    QPixmap pixmap(path);
+    QIcon ButtonIcon(pixmap);
+    button->setIcon(ButtonIcon);
+    button->setIconSize(pixmap.rect().size());
+}
+
+/**
+ * Function for creating field - buttons for shift,
+ * map buttons, score board and right panel with
+ * symbol and free map piece with rotate buttons
+ */
+void MainWindow::createField()
+{
     this->setFixedSize((24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 64 + 32 ),(8 + 24 + 8 + (50*VELIKOST) + 8 + 24 + 8 + 16 + 22));
 
     for(int i = 0; i<VELIKOST; i++)
@@ -18,6 +78,7 @@ MainWindow::MainWindow(QWidget *parent) :
            m_button[i][j]->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*j), 8 + 24 + 8 + (50*i)), QSize(48, 48)));
            m_button[i][j]->setMinimumHeight(i);
            m_button[i][j]->setMinimumWidth(j);
+           m_button[i][j]->setText("");
 
            // Connect button signal to appropriate slot
            connect(m_button[i][j], SIGNAL(released()), this, SLOT(handleButton()));
@@ -76,48 +137,4 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->square->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4), QSize(48, 48)));
     ui->square->setPixmap( QPixmap( "resources/square.png"));
-
-
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
-void MainWindow::handleButton()
-{
-    QPushButton *button = (QPushButton *)sender(); //do button si ulozim ten objekt, ktery zavolal slot
-
-    // change the text
-    m_button[button->minimumHeight()][button->minimumWidth()]->setText("Exp");
-}
-
-void MainWindow::handleHShift()
-{
-
-}
-
-void MainWindow::handleVShift()
-{
-
-}
-
-void MainWindow::handleRotateR()
-{
-
-}
-
-void MainWindow::handleRotateL()
-{
-
-}
-
-void MainWindow::changeIcon(QPushButton *button, const char* path)
-{
-
-    QPixmap pixmap(path);
-    QIcon ButtonIcon(pixmap);
-    button->setIcon(ButtonIcon);
-    button->setIconSize(pixmap.rect().size());
 }

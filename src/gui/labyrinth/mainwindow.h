@@ -34,6 +34,7 @@ public:
     QPushButton *v_button[VELIKOST/2][1];
 
     void changeIcon(QPushButton *button,const char* path);
+    void createField();
 };
 
 #endif // MAINWINDOW_H
