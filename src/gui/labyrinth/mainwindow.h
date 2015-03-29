@@ -27,6 +27,7 @@ private slots:
     void handleVShift();
     void handleRotateR();
     void handleRotateL();
+    void askIP();
 
 public:
     QPushButton *m_button[VELIKOST][VELIKOST];

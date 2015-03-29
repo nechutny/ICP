@@ -46,6 +46,11 @@ void MainWindow::handleRotateL()
 
 }
 
+void MainWindow::askIP() //obslouzeni polozky hra - nova sitova
+{
+
+}
+
 /**
  * Function for changing image on button
  * @param button button I want to change
@@ -137,4 +142,6 @@ void MainWindow::createField()
 
     ui->square->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4), QSize(48, 48)));
     ui->square->setPixmap( QPixmap( "resources/square.png"));
+
+    connect(ui->actionNov_s_ov, SIGNAL(triggered()), this, SLOT(askIP()));  //melo by fungovat jako obslouzeni polozky menu hra - nova sitova
 }
