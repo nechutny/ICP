@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QPushButton>
 
-#define VELIKOST 7
+#define VELIKOST 5
 
 namespace Ui {
 class MainWindow;
@@ -25,6 +25,8 @@ private slots:
     void handleButton();
     void handleHShift();
     void handleVShift();
+    void handleRotateR();
+    void handleRotateL();
 
 public:
     QPushButton *m_button[VELIKOST][VELIKOST];

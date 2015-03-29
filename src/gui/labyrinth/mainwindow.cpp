@@ -55,6 +55,29 @@ MainWindow::MainWindow(QWidget *parent) :
     //this->label_2->setHeight(8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8);
     //nemuzu se dostat k labelu a nevim proc!
     //QLabel *label = this->findChild<QLabel *>("label");
+    ui->label->setGeometry(QRect(QPoint(35, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(51, 17)));
+    ui->label_2->setGeometry(QRect(QPoint(125, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(51, 17)));
+    ui->label_3->setGeometry(QRect(QPoint(205, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(58, 17)));
+    ui->label_4->setGeometry(QRect(QPoint(305, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(51, 17)));
+
+    ui->scoreGreen->setGeometry(QRect(QPoint(90, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(25, 17)));
+    ui->scoreYellow->setGeometry(QRect(QPoint(170, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(25, 17)));
+    ui->scoreRed->setGeometry(QRect(QPoint(270, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(25, 17)));
+    ui->scoreBlue->setGeometry(QRect(QPoint(356, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(25, 17)));
+
+    //ui->scoreBlue->setText(QVariant(24).toString()); //převádění intu na řetězec pro label
+    ui->card->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32,20), QSize(64, 128)));
+    ui->card->setPixmap( QPixmap( "resources/card.png" ));
+
+    ui->rotateR->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20), QSize(48, 24)));
+    connect(ui->rotateR, SIGNAL(released()), this, SLOT(handleRotateR()));
+
+    ui->rotateL->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4 + 48 + 4), QSize(48, 24)));
+    connect(ui->rotateR, SIGNAL(released()), this, SLOT(handleRotateL()));
+
+    ui->square->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4), QSize(48, 48)));
+    ui->square->setPixmap( QPixmap( "resources/square.png"));
+
 
 }
 
@@ -77,6 +100,16 @@ void MainWindow::handleHShift()
 }
 
 void MainWindow::handleVShift()
+{
+
+}
+
+void MainWindow::handleRotateR()
+{
+
+}
+
+void MainWindow::handleRotateL()
 {
 
 }
