@@ -23,9 +23,13 @@ private:
 
 private slots:
     void handleButton();
+    void handleHShift();
+    void handleVShift();
 
 public:
     QPushButton *m_button[VELIKOST][VELIKOST];
+    QPushButton *h_button[VELIKOST/2][1];
+    QPushButton *v_button[VELIKOST/2][1];
 };
 
 #endif // MAINWINDOW_H
