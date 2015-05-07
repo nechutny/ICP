@@ -8,10 +8,12 @@
 
 #include <stdbool.h>
 #include "types.h"
+#include <stack>
 
 class Player;
 
 #include "map.h"
+#include "block.h"
 
 class Player
 {
@@ -24,7 +26,10 @@ class Player
 		int _id;
 		Map* _map;
 
+
 	public:
+		Player(color col, Map* map);
+
 		/**
 		 * Get player color
 		 *

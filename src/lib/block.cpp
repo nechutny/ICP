@@ -4,12 +4,27 @@
  * @author	Stanislav Nechutný - xnechu01
  */
 
+#include <iostream>
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include "types.h"
 #include "player.h"
 #include "block.h"
 
+
+Block::Block()
+{
+	_type = TYPE_L;
+	_rotation = 0;
+	_symbol = 0;
+	_players = (Player**)malloc(sizeof(Player*)*4);
+}
+
+Block::~Block()
+{
+	free(_players);
+}
 
 
 /**
@@ -20,6 +35,16 @@
 int Block::getRotation()
 {
 	return _rotation;
+}
+
+/**
+ * Set block rotation
+ *
+ * @param	int	rot	Number 0-3, radians in positive direction of rotation
+ */
+void Block::setRotation(int rot)
+{
+	_rotation = rot;
 }
 
 /**
@@ -50,7 +75,7 @@ int Block::getSymbol()
 Player** Block::getPlayers()
 {
 	// TODO
-	return NULL;
+	return _players;
 }
 
 /**
@@ -60,6 +85,7 @@ Player** Block::getPlayers()
  */
 bool Block::isOccupied()
 {
+	// TODO
 	return true;
 }
 
@@ -118,5 +144,68 @@ void Block::setType(block_type type)
 void Block::setSymbol(int symbol)
 {
 	_symbol = symbol;
+}
+
+bool Block::toDirection(int direction)
+{
+	int rotation = getRotation();
+
+	switch(getType())
+	{
+		case TYPE_L:
+			return ( direction == rotation || direction == (rotation+1)%4);
+		case TYPE_I:
+			return ((direction+1)%2 == rotation%2);
+
+		case TYPE_T:
+			return ((rotation+1)%4 != direction);
+	}
+
+	return false;
+}
+bool Block::fromDirection(int direction)
+{
+	return toDirection(direction);
+}
+
+std::string Block::toChar()
+{
+	switch(getType())
+	{
+		case TYPE_L:
+			switch(getRotation())
+			{
+				case 0:
+					return "╚";
+				case 1:
+					return "╝";
+				case 2:
+					return "╗";
+				case 3:
+					return "╔";
+			}
+		case TYPE_I:
+			switch(getRotation()%2)
+			{
+				case 0:
+					return "║";
+				case 1:
+					return "═";
+			}
+		case TYPE_T:
+			switch(getRotation())
+			{
+				case 0:
+					return "╦";
+				case 1:
+					return "╠";
+				case 2:
+					return "╩";
+				case 3:
+					return "╣";
+			}
+	}
+
+	return " ";
 }
 

@@ -6,6 +6,8 @@
 #ifndef MAP_H
 #define MAP_H
 
+class Map;
+
 #include "block.h"
 
 class Map
@@ -13,10 +15,12 @@ class Map
 	protected:
 		Block* _freeBlock;
 		Block** _map;
-		int size;
+		int _size;
 		// TODO: onTurn[]
 
 	public:
+		~Map();
+
 		/**
 		 * Save map to file for future load
 		 */
@@ -65,5 +69,15 @@ class Map
 		 * @return	int	Count
 		 */
 		int getMaxSymbolsCount();
+
+		/**
+		 * Calculate offset for block array
+		 *
+		 * @param	int	x	Row number from 0
+		 * @param	int	y	Column number from 0
+		 *
+		 * @return	int	Offset, or -1 for out of range
+		 */
+		int offset(int x, int y);
 };
 #endif

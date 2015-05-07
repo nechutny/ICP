@@ -6,6 +6,9 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
+class Block;
+
+#include <iostream>
 #include <stdbool.h>
 #include "types.h"
 #include "player.h"
@@ -13,19 +16,30 @@
 
 class Block
 {
-	protected:
+	private:
 		block_type _type;
 		int _rotation;
 		int _symbol;
 		Player** _players;
 
 	public:
+		Block();
+
+		~Block();
+
 		/**
 		 * Get block rotation
 		 *
 		 * @return	int	Number 0-3, radians in positive direction of rotation
 		 */
 		int getRotation();
+
+		/**
+		 * Set block rotation
+		 *
+		 * @param	int	rot	Number 0-3, radians in positive direction of rotation
+		 */
+		void setRotation(int rot);
 
 		/**
 		 * Get block type
@@ -93,5 +107,10 @@ class Block
 		 * @param	int	symbol	Symbol ID, or 0 for nothing
 		 */
 		void setSymbol(int symbol);
+
+		bool toDirection(int direction);
+		bool fromDirection(int direction);
+
+		std::string toChar();
 };
 #endif
