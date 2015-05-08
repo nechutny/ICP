@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
@@ -40,7 +41,6 @@ public:
     QLabel *scoreYellow;
     QLabel *scoreRed;
     QLabel *scoreBlue;
-    QLabel *card;
     QPushButton *rotateR;
     QPushButton *rotateL;
     QPushButton *square;
@@ -49,6 +49,11 @@ public:
     QSpinBox *spinBox_2;
     QLabel *label_6;
     QPushButton *pushButton;
+    QPushButton *card;
+    QCheckBox *checkBox;
+    QCheckBox *checkBox_2;
+    QCheckBox *checkBox_3;
+    QCheckBox *checkBox_4;
     QMenuBar *menuBar;
     QMenu *menuHra;
     QMenu *menuN_pov_da;
@@ -69,7 +74,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(10, 290, 51, 17));
+        label->setGeometry(QRect(30, 290, 51, 17));
         QPalette palette;
         QBrush brush(QColor(0, 170, 0, 255));
         brush.setStyle(Qt::SolidPattern);
@@ -239,9 +244,6 @@ public:
         scoreBlue = new QLabel(centralWidget);
         scoreBlue->setObjectName(QStringLiteral("scoreBlue"));
         scoreBlue->setGeometry(QRect(330, 250, 31, 17));
-        card = new QLabel(centralWidget);
-        card->setObjectName(QStringLiteral("card"));
-        card->setGeometry(QRect(400, 0, 64, 128));
         rotateR = new QPushButton(centralWidget);
         rotateR->setObjectName(QStringLiteral("rotateR"));
         rotateR->setGeometry(QRect(390, 150, 85, 27));
@@ -257,6 +259,7 @@ public:
         spinBox->setMinimum(5);
         spinBox->setMaximum(11);
         spinBox->setSingleStep(2);
+        spinBox->setValue(7);
         label_5 = new QLabel(centralWidget);
         label_5->setObjectName(QStringLiteral("label_5"));
         label_5->setGeometry(QRect(400, 270, 55, 17));
@@ -272,6 +275,22 @@ public:
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(400, 330, 85, 27));
+        card = new QPushButton(centralWidget);
+        card->setObjectName(QStringLiteral("card"));
+        card->setGeometry(QRect(390, 60, 85, 27));
+        checkBox = new QCheckBox(centralWidget);
+        checkBox->setObjectName(QStringLiteral("checkBox"));
+        checkBox->setEnabled(true);
+        checkBox->setGeometry(QRect(0, 290, 20, 22));
+        checkBox_2 = new QCheckBox(centralWidget);
+        checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
+        checkBox_2->setGeometry(QRect(80, 290, 21, 22));
+        checkBox_3 = new QCheckBox(centralWidget);
+        checkBox_3->setObjectName(QStringLiteral("checkBox_3"));
+        checkBox_3->setGeometry(QRect(160, 290, 21, 22));
+        checkBox_4 = new QCheckBox(centralWidget);
+        checkBox_4->setObjectName(QStringLiteral("checkBox_4"));
+        checkBox_4->setGeometry(QRect(260, 290, 21, 22));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -310,13 +329,17 @@ public:
         scoreYellow->setText(QApplication::translate("MainWindow", "0", 0));
         scoreRed->setText(QApplication::translate("MainWindow", "0", 0));
         scoreBlue->setText(QApplication::translate("MainWindow", "0", 0));
-        card->setText(QApplication::translate("MainWindow", "card", 0));
         rotateR->setText(QString());
         rotateL->setText(QString());
         square->setText(QString());
         label_5->setText(QApplication::translate("MainWindow", "Velikost", 0));
         label_6->setText(QApplication::translate("MainWindow", "Po\304\215et karet", 0));
         pushButton->setText(QApplication::translate("MainWindow", "Nov\303\241 hra", 0));
+        card->setText(QString());
+        checkBox->setText(QString());
+        checkBox_2->setText(QString());
+        checkBox_3->setText(QString());
+        checkBox_4->setText(QString());
         menuHra->setTitle(QApplication::translate("MainWindow", "Hra", 0));
         menuN_pov_da->setTitle(QApplication::translate("MainWindow", "N\303\241pov\304\233da", 0));
     } // retranslateUi

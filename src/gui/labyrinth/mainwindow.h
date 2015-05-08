@@ -8,7 +8,7 @@
 #include "block.h"
 #include <QLabel>
 
-#define VELIKOST 11
+#define VELIKOST 7
 
 namespace Ui {
 class MainWindow;
@@ -23,12 +23,14 @@ public:
     ~MainWindow();
     void changeBlock(QPushButton *button,Block* kamen);
     void changeIcon(QPushButton *button,const char* path);
+    void changeCard();
 
 private:
     Ui::MainWindow *ui;
     Map* mapa;
     Player* hraci[4];
     int hrac;
+    int pocet_hracu = 0;
     bool posunuto;
 
 private slots:
@@ -37,13 +39,16 @@ private slots:
     void handleVShift();
     void handleRotateR();
     void handleRotateL();
-    void createField();
+
     void prekresli();
+    void spust();
 
 public:
     QPushButton *m_button[VELIKOST][VELIKOST];
     QPushButton *h_button[VELIKOST/2][1];
     QPushButton *v_button[VELIKOST/2][1];
+
+    void createField();
 
 };
 
