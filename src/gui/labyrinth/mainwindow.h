@@ -30,7 +30,7 @@ private:
     Map* mapa;
     Player* hraci[4];
     int hrac;
-    int pocet_hracu = 0;
+    int pocet_hracu;
     bool posunuto;
 
 private slots:

@@ -16,6 +16,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     mapa->generate(VELIKOST, 24);
 
+    hraci[0] = NULL;
+    hraci[1] = NULL;
+    hraci[2] = NULL;
+    hraci[3] = NULL;
+
     hrac = 0;
     posunuto = false;
     createField();
@@ -149,6 +154,8 @@ void MainWindow::prekresli()
 
 
         char nazev[40] = "";
+       if(hraci[hrac] != NULL)
+       {
         sprintf(nazev,"resources/symbol%d.png", hraci[hrac]->getSymbol());
         QPixmap icon2(nazev);
 
@@ -156,7 +163,7 @@ void MainWindow::prekresli()
         icon2 = icon2.scaled(QSize(36,36),Qt::KeepAspectRatio, Qt::SmoothTransformation);
         QPainter painter(&transPixmap);
         painter.drawPixmap((transPixmap.width()-icon2.width())/2,(transPixmap.height()-icon2.height())/2,icon2);
-
+	}
 
     QIcon ButtonIcon(transPixmap);
     ui->card->setIcon(ButtonIcon);
