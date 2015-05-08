@@ -19,6 +19,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
 
@@ -43,6 +44,10 @@ public:
     QPushButton *rotateR;
     QPushButton *rotateL;
     QPushButton *square;
+    QSpinBox *spinBox;
+    QLabel *label_5;
+    QSpinBox *spinBox_2;
+    QLabel *label_6;
     QPushButton *pushButton;
     QMenuBar *menuBar;
     QMenu *menuHra;
@@ -53,7 +58,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(493, 368);
+        MainWindow->resize(512, 411);
         actionNov_s_ov = new QAction(MainWindow);
         actionNov_s_ov->setObjectName(QStringLiteral("actionNov_s_ov"));
         novaHra = new QAction(MainWindow);
@@ -246,13 +251,31 @@ public:
         square = new QPushButton(centralWidget);
         square->setObjectName(QStringLiteral("square"));
         square->setGeometry(QRect(390, 190, 85, 27));
+        spinBox = new QSpinBox(centralWidget);
+        spinBox->setObjectName(QStringLiteral("spinBox"));
+        spinBox->setGeometry(QRect(410, 290, 46, 27));
+        spinBox->setMinimum(5);
+        spinBox->setMaximum(11);
+        spinBox->setSingleStep(2);
+        label_5 = new QLabel(centralWidget);
+        label_5->setObjectName(QStringLiteral("label_5"));
+        label_5->setGeometry(QRect(400, 270, 55, 17));
+        spinBox_2 = new QSpinBox(centralWidget);
+        spinBox_2->setObjectName(QStringLiteral("spinBox_2"));
+        spinBox_2->setGeometry(QRect(350, 290, 46, 27));
+        spinBox_2->setMinimum(12);
+        spinBox_2->setMaximum(24);
+        spinBox_2->setSingleStep(12);
+        label_6 = new QLabel(centralWidget);
+        label_6->setObjectName(QStringLiteral("label_6"));
+        label_6->setGeometry(QRect(340, 260, 55, 17));
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(180, 180, 85, 27));
+        pushButton->setGeometry(QRect(400, 330, 85, 27));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 493, 27));
+        menuBar->setGeometry(QRect(0, 0, 512, 27));
         menuHra = new QMenu(menuBar);
         menuHra->setObjectName(QStringLiteral("menuHra"));
         menuN_pov_da = new QMenu(menuBar);
@@ -291,6 +314,8 @@ public:
         rotateR->setText(QString());
         rotateL->setText(QString());
         square->setText(QString());
+        label_5->setText(QApplication::translate("MainWindow", "Velikost", 0));
+        label_6->setText(QApplication::translate("MainWindow", "Po\304\215et karet", 0));
         pushButton->setText(QApplication::translate("MainWindow", "Nov\303\241 hra", 0));
         menuHra->setTitle(QApplication::translate("MainWindow", "Hra", 0));
         menuN_pov_da->setTitle(QApplication::translate("MainWindow", "N\303\241pov\304\233da", 0));

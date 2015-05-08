@@ -12,8 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    tohle = this;
-    connect(ui->pushButton, SIGNAL(released()), tohle, SLOT(createField()));
     mapa = new Map;
     mapa->generate(VELIKOST);
     hraci[0] = new Player(COLOR_RED,mapa);
@@ -22,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     hraci[3] = new Player(COLOR_YELLOW,mapa);
     hrac = 0;
     posunuto = false;
-    //createField();
+    createField();
 
 }
 
@@ -216,6 +214,17 @@ void MainWindow::createField()
 
     ui->square->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4), QSize(48, 48)));
     //ui->square->setPixmap( QPixmap( "resources/square.png"));
+
+    ui->spinBox->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4 + 48 + 4 + 20 + 20), QSize(48, 24)));
+
+    ui->label_5->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4 + 48 + 4 + 20), QSize(48, 24)));
+
+    ui->spinBox_2->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24, 20 + 128 + 20 + 24 + 4 + 48 + 4 + 20 + 20), QSize(48, 24)));
+
+    ui->label_6->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 14, 20 + 128 + 20 + 24 + 4 + 48 + 4 + 20), QSize(68, 24)));
+
+    ui->pushButton->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 30, 20 + 128 + 20 + 24 + 4 + 48 + 4 + 20 + 20 + 24 + 4), QSize(68, 24)));
+
     prekresli();
 
 }

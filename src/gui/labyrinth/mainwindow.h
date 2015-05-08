@@ -8,7 +8,7 @@
 #include "block.h"
 #include <QLabel>
 
-#define VELIKOST 11
+#define VELIKOST 5
 
 namespace Ui {
 class MainWindow;
@@ -30,7 +30,6 @@ private:
     Player* hraci[4];
     int hrac;
     bool posunuto;
-    MainWindow *tohle;
 
 private slots:
     void handleButton();
@@ -46,9 +45,6 @@ public:
     QPushButton *h_button[VELIKOST/2][1];
     QPushButton *v_button[VELIKOST/2][1];
 
-
-
-    //void createField();
 };
 
 #endif // MAINWINDOW_H
