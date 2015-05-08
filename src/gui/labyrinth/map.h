@@ -30,8 +30,9 @@ class Map
 		 * Generate map
 		 *
 		 * @param	int	N	Size of map (odd number 5-11)
+		 * @param	int	symbols	Number of symbols
 		 */
-		void generate(int N);
+		void generate(int N, int symbols);
 
 
 		/**
