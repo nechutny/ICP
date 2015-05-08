@@ -26,7 +26,7 @@ Map::~Map()
 }
 
 
-void Map::generate(int N)
+void Map::generate(int N, int symbols)
 {
 	srand (time(NULL));
 
@@ -122,7 +122,6 @@ void Map::generate(int N)
 	_freeBlock->setType((block_type)type);
 	_freeBlock->setRotation((type+rand1) % 4 );
 
-	int symbols = 12;
 	while(true)
 	{
 		rand1 = rand()%_size;
