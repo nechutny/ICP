@@ -17,8 +17,6 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenu>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
@@ -54,9 +52,6 @@ public:
     QCheckBox *checkBox_2;
     QCheckBox *checkBox_3;
     QCheckBox *checkBox_4;
-    QMenuBar *menuBar;
-    QMenu *menuHra;
-    QMenu *menuN_pov_da;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -292,23 +287,10 @@ public:
         checkBox_4->setObjectName(QStringLiteral("checkBox_4"));
         checkBox_4->setGeometry(QRect(260, 290, 21, 22));
         MainWindow->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(MainWindow);
-        menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 512, 27));
-        menuHra = new QMenu(menuBar);
-        menuHra->setObjectName(QStringLiteral("menuHra"));
-        menuN_pov_da = new QMenu(menuBar);
-        menuN_pov_da->setObjectName(QStringLiteral("menuN_pov_da"));
-        MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         statusBar->setEnabled(true);
         MainWindow->setStatusBar(statusBar);
-
-        menuBar->addAction(menuHra->menuAction());
-        menuBar->addAction(menuN_pov_da->menuAction());
-        menuHra->addAction(actionUlo_it);
-        menuHra->addSeparator();
 
         retranslateUi(MainWindow);
 
@@ -340,8 +322,6 @@ public:
         checkBox_2->setText(QString());
         checkBox_3->setText(QString());
         checkBox_4->setText(QString());
-        menuHra->setTitle(QApplication::translate("MainWindow", "Hra", 0));
-        menuN_pov_da->setTitle(QApplication::translate("MainWindow", "N\303\241pov\304\233da", 0));
     } // retranslateUi
 
 };

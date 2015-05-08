@@ -15,10 +15,6 @@ MainWindow::MainWindow(QWidget *parent) :
     mapa = new Map;
 
     mapa->generate(VELIKOST, 24);
-    hraci[0] = new Player(COLOR_RED,mapa);
-    hraci[1] = new Player(COLOR_GREEN,mapa);
-    hraci[2] = new Player(COLOR_BLUE,mapa);
-    hraci[3] = new Player(COLOR_YELLOW,mapa);
 
     hrac = 0;
     posunuto = false;
@@ -67,11 +63,11 @@ void MainWindow::handleVShift()
 
 void MainWindow::handleRotateR()
 {
-    printf("%d\n",mapa->getFreeBlock()->getRotation());
+    //printf("%d\n",mapa->getFreeBlock()->getRotation());
     mapa->getFreeBlock()->rotateRight();
     prekresli();
     //printf("otoceni");
-    printf("%d\n\n",mapa->getFreeBlock()->getRotation());
+    //printf("%d\n\n",mapa->getFreeBlock()->getRotation());
 }
 
 void MainWindow::handleRotateL()
@@ -221,7 +217,7 @@ void MainWindow::spust()
         pocet_hracu++;
     }
 
-    if(pocet_hracu<3)
+    if(pocet_hracu<2)
         ui->pushButton->setText("Málo hráčů");
     else
     {
