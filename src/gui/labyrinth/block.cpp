@@ -21,6 +21,10 @@ Block::Block()
 	_rotation = 0;
 	_symbol = 0;
 	_players = (Player**)malloc(sizeof(Player*)*4);
+	_players[0] = NULL;
+	_players[1] = NULL;
+	_players[2] = NULL;
+	_players[3] = NULL;
 }
 
 
@@ -80,7 +84,6 @@ int Block::getSymbol()
  */
 Player** Block::getPlayers()
 {
-	// TODO
 	return _players;
 }
 
@@ -91,8 +94,7 @@ Player** Block::getPlayers()
  */
 bool Block::isOccupied()
 {
-	// TODO
-	return true;
+	return (_players[0] != NULL || _players[1] != NULL || _players[2] != NULL || _players[3] != NULL);
 }
 
 /**
@@ -100,7 +102,9 @@ bool Block::isOccupied()
  */
 void Block::rotateLeft()
 {
+	printf("a: %d\n", _rotation);
 	_rotation = (_rotation+1)%4;
+	printf("a: %d\n", _rotation);
 }
 
 /**
@@ -108,7 +112,9 @@ void Block::rotateLeft()
  */
 void Block::rotateRight()
 {
+	printf("b: %d\n", _rotation);
 	_rotation = (_rotation+3)%4;
+	printf("b: %d\n", _rotation);
 }
 
 /**

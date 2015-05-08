@@ -15,14 +15,14 @@ MainWindow::MainWindow(QWidget *parent) :
     tohle = this;
     connect(ui->pushButton, SIGNAL(released()), tohle, SLOT(createField()));
     mapa = new Map;
-    mapa->generate(VELIKOST);
+    mapa->generate(VELIKOST, 24);
     hraci[0] = new Player(COLOR_RED,mapa);
     hraci[1] = new Player(COLOR_GREEN,mapa);
     hraci[2] = new Player(COLOR_BLUE,mapa);
     hraci[3] = new Player(COLOR_YELLOW,mapa);
     hrac = 0;
     posunuto = false;
-    //createField();
+    createField();
 
 }
 
@@ -97,22 +97,45 @@ void MainWindow::prekresli()
 {
     int type = kamen->getType();
     QPixmap pixmap(type == 0 ? "resources/block-L.png" : type == 1 ? "resources/block-T.png" : "resources/block-I.png");
-
-    QTransform transform;
-    QTransform trans = transform.rotate((kamen->getRotation()) * 90);
-    QPixmap *transPixmap = new QPixmap(pixmap.transformed(trans));
+	char nazev[40] = "";
 
     if(kamen->getSymbol() != 0)
     {
-        char nazev[40] = "";
+
         sprintf(nazev,"resources/symbol%d.png", kamen->getSymbol());
         QPixmap icon2(nazev);
 
         // paints a midget of icon2 onto icon1
         icon2 = icon2.scaled(QSize(28,28),Qt::KeepAspectRatio, Qt::SmoothTransformation);
-        QPainter painter(transPixmap);
-        painter.drawPixmap((transPixmap->width()-icon2.width())/2,(transPixmap->height()-icon2.height())/2,icon2);
+        QPainter painter(&pixmap);
+        painter.drawPixmap((pixmap.width()-icon2.width())/2,(pixmap.height()-icon2.height())/2,icon2);
+
     }
+
+    if(kamen->isOccupied())
+    {
+	    Player** players = kamen->getPlayers();
+	    for(int i = 0; i < 4; i++)
+	    {
+		    if(players[i] != NULL)
+		    {
+			sprintf(nazev,"resources/player-%d.png", i+1);
+			QPixmap icon2(nazev);
+
+			// paints a midget of icon2 onto icon1
+			icon2 = icon2.scaled(QSize(28,28),Qt::KeepAspectRatio, Qt::SmoothTransformation);
+			QPainter painter(&pixmap);
+			painter.drawPixmap((pixmap.width()-icon2.width())/2,(pixmap.height()-icon2.height())/2,icon2);
+
+			}
+		}
+    }
+
+
+    QTransform transform;
+    QTransform trans = transform.rotate((kamen->getRotation()) * -90);
+    QPixmap *transPixmap = new QPixmap(pixmap.transformed(trans));
+
 
 
     QIcon ButtonIcon(*transPixmap);
@@ -211,7 +234,7 @@ void MainWindow::createField()
     changeIcon(ui->rotateR, "resources/rotateR.png");
 
     ui->rotateL->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4 + 48 + 4), QSize(48, 24)));
-    connect(ui->rotateR, SIGNAL(released()), this, SLOT(handleRotateL()));
+    connect(ui->rotateL, SIGNAL(released()), this, SLOT(handleRotateL()));
     changeIcon(ui->rotateL, "resources/rotateL.png");
 
     ui->square->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4), QSize(48, 48)));

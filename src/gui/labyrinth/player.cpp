@@ -24,7 +24,7 @@ Player::Player(color col,  Map* map)
 	_score = 0;
 	_position_x = (col%2 == 0) ? 0 : map->getSize()-1;
 	_position_y = (col < 2) ? 0 : map->getSize()-1;
-	_symbol = 0;
+	_symbol = 1;
 	_id = col;
 	_map = map;
 
@@ -82,6 +82,9 @@ bool Player::move(int x, int y)
 
 			blocks[ _map->offset(_position_x, _position_y) ]->removePlayer(_id);
 			blocks[ _map->offset(x, y) ]->addPlayer(this);
+
+			_position_x = x;
+			_position_y = y;
 
 			return true;
 		}

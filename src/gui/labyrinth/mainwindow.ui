@@ -1139,30 +1139,6 @@
     </property>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>493</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuHra">
-    <property name="title">
-     <string>Hra</string>
-    </property>
-    <addaction name="actionUlo_it"/>
-    <addaction name="separator"/>
-   </widget>
-   <widget class="QMenu" name="menuN_pov_da">
-    <property name="title">
-     <string>Nápověda</string>
-    </property>
-   </widget>
-   <addaction name="menuHra"/>
-   <addaction name="menuN_pov_da"/>
-  </widget>
   <widget class="QStatusBar" name="statusBar">
    <property name="enabled">
     <bool>true</bool>

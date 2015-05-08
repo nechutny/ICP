@@ -88,7 +88,7 @@ void Map::generate(int N, int symbols)
 	}
 
 	unsigned rand1 = rand(), rand2 = rand();
-	unsigned type;
+	unsigned type = 1;
 
 	for(int  i = 0; i < N; i++)
 	{
@@ -100,6 +100,7 @@ void Map::generate(int N, int symbols)
 			}
 			else
 			{
+				printf("map %d %d\n",i,j);
 				rand1 = rand();
 				rand2 = rand();
 
@@ -126,7 +127,7 @@ void Map::generate(int N, int symbols)
 	{
 		rand1 = rand()%_size;
 		rand2 = rand()%_size;
-		if((rand1 == 0 && rand2 == 0) || (rand1 == (unsigned)_size-1 && rand2 != 0)  || (rand2 == (unsigned)_size-1 && rand1 != 0) || (rand1 == (unsigned)_size-1 && rand2 == (unsigned)_size-1))
+		if((rand1 == 0 && rand2 == 0) || (rand1 == (unsigned)_size-1 && rand2 == 0)  || (rand2 == (unsigned)_size-1 && rand1 == 0) || (rand1 == (unsigned)_size-1 && rand2 == (unsigned)_size-1))
 		{
 		}
 		else
