@@ -151,7 +151,7 @@ void MainWindow::createField()
         for(int j=0; j<VELIKOST; j++)
         {
         // Create the button, make "this" the parent
-           m_button[i][j] = new QPushButton("My Button",ui->centralWidget());
+           m_button[i][j] = new QPushButton("My Button",this);
            // set size and location of the button
            m_button[i][j]->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*j), 8 + 24 + 8 + (50*i)), QSize(48, 48)));
            m_button[i][j]->setMinimumHeight(i);
