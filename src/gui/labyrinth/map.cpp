@@ -122,6 +122,28 @@ void Map::generate(int N)
 	_freeBlock->setType((block_type)type);
 	_freeBlock->setRotation((type+rand1) % 4 );
 
+	int symbols = 12;
+	while(true)
+	{
+		rand1 = rand()%_size;
+		rand2 = rand()%_size;
+		if((rand1 == 0 && rand2 == 0) || (rand1 == _size-1 && rand2 != 0)  || (rand2 == _size-1 && rand1 != 0) || (rand1 == _size-1 && rand2 == _size-1))
+		{
+		}
+		else
+		{
+			if(_map[ offset(rand1, rand2) ]->getSymbol() == 0)
+			{
+				_map[ offset(rand1, rand2) ]->setSymbol(symbols);
+				symbols--;
+				if(symbols == 0)
+				{
+					break;
+				}
+			}
+		}
+	}
+
 
 }
 
