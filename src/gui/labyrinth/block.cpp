@@ -12,7 +12,9 @@
 #include "player.h"
 #include "block.h"
 
-
+/**
+ * Block constructor, perform allocations
+ */
 Block::Block()
 {
 	_type = TYPE_L;
@@ -21,6 +23,10 @@ Block::Block()
 	_players = (Player**)malloc(sizeof(Player*)*4);
 }
 
+
+/**
+ * Block destructor - deallocate memory
+ */
 Block::~Block()
 {
 	free(_players);

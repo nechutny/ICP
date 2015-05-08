@@ -28,6 +28,12 @@ class Player
 
 
 	public:
+		/**
+		 * Player constructor
+		 *
+		 * @param	color	col	Player color
+		 * @param	Map*	map	Pointer to map
+		 */
 		Player(color col, Map* map);
 
 		/**
