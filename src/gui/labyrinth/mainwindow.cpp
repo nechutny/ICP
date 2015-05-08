@@ -34,6 +34,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::handleButton()
 {//button->minimumHeight(),button->minimumWidth()
+
 	QPushButton *button = (QPushButton *)sender(); //do button si ulozim ten objekt, ktery zavolal slot
 	if(hraci[hrac]->move(button->minimumHeight(),button->minimumWidth()))
 	{
