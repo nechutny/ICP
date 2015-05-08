@@ -38,7 +38,7 @@ void MainWindow::handleButton()
     if(hraci[hrac]->move(button->minimumHeight(),button->minimumWidth()))
     {
         prekresli();
-        hrac = (hrac+1)%pocet_hracu; //potreba upravit pro neplny pocet hracu !!!!!!!!!!!!!!!
+        hrac = (hrac+1)%pocet_hracu;
         posunuto = false;
     }
 }
