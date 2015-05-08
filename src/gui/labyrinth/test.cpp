@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
 {
 	Map *mapa = new Map;
 
-	mapa->generate(11, 24);
+	mapa->generate(5, 24);
 
 	renderMap(mapa);
 
