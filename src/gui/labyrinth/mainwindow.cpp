@@ -1,5 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "stdio.h"
+#include "player.h"
+#include "map.h"
+#include "block.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -8,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     createField();
-
 
 
 }
@@ -46,10 +49,6 @@ void MainWindow::handleRotateL()
 
 }
 
-void MainWindow::askIP() //obslouzeni polozky hra - nova sitova
-{
-
-}
 
 /**
  * Function for changing image on button
@@ -77,6 +76,7 @@ void MainWindow::createField()
     for(int i = 0; i<VELIKOST; i++)
         for(int j=0; j<VELIKOST; j++)
         {
+            printf("%d\n",VELIKOST);
         // Create the button, make "this" the parent
            m_button[i][j] = new QPushButton("My Button", this);
            // set size and location of the button
@@ -113,7 +113,7 @@ void MainWindow::createField()
 
         v_button[i][1] = new QPushButton("/\\", this);
         v_button[i][1]->setGeometry(QRect(QPoint(24 + 24 + 24 + (2*50*i) + 50, 8 + 24 + 8 + 50*VELIKOST + 8), QSize(48, 24)));
-        v_button[i][0]->setMinimumHeight(1);
+        v_button[i][1]->setMinimumHeight(1);
         v_button[i][1]->setMinimumWidth(i);
         connect(v_button[i][1], SIGNAL(released()), this, SLOT(handleVShift()));
     }
@@ -142,6 +142,6 @@ void MainWindow::createField()
 
     ui->square->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4), QSize(48, 48)));
     ui->square->setPixmap( QPixmap( "resources/square.png"));
+    this->repaint();
 
-    connect(ui->actionNov_s_ov, SIGNAL(triggered()), this, SLOT(askIP()));  //melo by fungovat jako obslouzeni polozky menu hra - nova sitova
 }

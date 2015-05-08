@@ -28,7 +28,7 @@ class Ui_MainWindow
 {
 public:
     QAction *actionNov_s_ov;
-    QAction *actionNov_lok_ln;
+    QAction *novaHra;
     QAction *actionUlo_it;
     QWidget *centralWidget;
     QLabel *label;
@@ -55,8 +55,8 @@ public:
         MainWindow->resize(493, 368);
         actionNov_s_ov = new QAction(MainWindow);
         actionNov_s_ov->setObjectName(QStringLiteral("actionNov_s_ov"));
-        actionNov_lok_ln = new QAction(MainWindow);
-        actionNov_lok_ln->setObjectName(QStringLiteral("actionNov_lok_ln"));
+        novaHra = new QAction(MainWindow);
+        novaHra->setObjectName(QStringLiteral("novaHra"));
         actionUlo_it = new QAction(MainWindow);
         actionUlo_it->setObjectName(QStringLiteral("actionUlo_it"));
         centralWidget = new QWidget(MainWindow);
@@ -261,9 +261,6 @@ public:
 
         menuBar->addAction(menuHra->menuAction());
         menuBar->addAction(menuN_pov_da->menuAction());
-        menuHra->addAction(actionNov_s_ov);
-        menuHra->addAction(actionNov_lok_ln);
-        menuHra->addSeparator();
         menuHra->addAction(actionUlo_it);
         menuHra->addSeparator();
 
@@ -276,7 +273,7 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         actionNov_s_ov->setText(QApplication::translate("MainWindow", "Nov\303\241 s\303\255\305\245ov\303\241", 0));
-        actionNov_lok_ln->setText(QApplication::translate("MainWindow", "Nov\303\241 lok\303\241ln\303\255", 0));
+        novaHra->setText(QApplication::translate("MainWindow", "Nov\303\241 hra", 0));
         actionUlo_it->setText(QApplication::translate("MainWindow", "Ulo\305\276it", 0));
         label->setText(QApplication::translate("MainWindow", "Zelen\303\275:", 0));
         label_2->setText(QApplication::translate("MainWindow", "\305\275lut\303\275:", 0));

@@ -1139,9 +1139,6 @@
     <property name="title">
      <string>Hra</string>
     </property>
-    <addaction name="actionNov_s_ov"/>
-    <addaction name="actionNov_lok_ln"/>
-    <addaction name="separator"/>
     <addaction name="actionUlo_it"/>
     <addaction name="separator"/>
    </widget>
@@ -1163,9 +1160,9 @@
     <string>Nová síťová</string>
    </property>
   </action>
-  <action name="actionNov_lok_ln">
+  <action name="novaHra">
    <property name="text">
-    <string>Nová lokální</string>
+    <string>Nová hra</string>
    </property>
   </action>
   <action name="actionUlo_it">

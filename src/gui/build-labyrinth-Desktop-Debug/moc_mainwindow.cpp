@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[8];
-    char stringdata[86];
+    char stringdata[92];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,11 +36,11 @@ QT_MOC_LITERAL(3, 25, 12),
 QT_MOC_LITERAL(4, 38, 12),
 QT_MOC_LITERAL(5, 51, 13),
 QT_MOC_LITERAL(6, 65, 13),
-QT_MOC_LITERAL(7, 79, 5)
+QT_MOC_LITERAL(7, 79, 11)
     },
     "MainWindow\0handleButton\0\0handleHShift\0"
     "handleVShift\0handleRotateR\0handleRotateL\0"
-    "askIP\0"
+    "createField\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -86,7 +86,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 2: _t->handleVShift(); break;
         case 3: _t->handleRotateR(); break;
         case 4: _t->handleRotateL(); break;
-        case 5: _t->askIP(); break;
+        case 5: _t->createField(); break;
         default: ;
         }
     }
