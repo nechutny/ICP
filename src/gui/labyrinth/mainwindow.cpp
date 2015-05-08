@@ -12,14 +12,14 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    tohle = this;
-    connect(ui->pushButton, SIGNAL(released()), tohle, SLOT(createField()));
     mapa = new Map;
+
     mapa->generate(VELIKOST, 24);
     hraci[0] = new Player(COLOR_RED,mapa);
     hraci[1] = new Player(COLOR_GREEN,mapa);
     hraci[2] = new Player(COLOR_BLUE,mapa);
     hraci[3] = new Player(COLOR_YELLOW,mapa);
+
     hrac = 0;
     posunuto = false;
     createField();
@@ -37,7 +37,7 @@ void MainWindow::handleButton()
     if(hraci[hrac]->move(button->minimumHeight(),button->minimumWidth()))
     {
         prekresli();
-        hrac = (hrac+1)%4; //potreba upravit pro neplny pocet hracu !!!!!!!!!!!!!!!
+        hrac = (hrac+1)%pocet_hracu; //potreba upravit pro neplny pocet hracu !!!!!!!!!!!!!!!
         posunuto = false;
     }
 }
@@ -147,6 +147,30 @@ void MainWindow::prekresli()
 
 
 
+ void MainWindow::changeCard()
+{
+    QPixmap transPixmap("resources/card.png");
+
+
+        char nazev[40] = "";
+        sprintf(nazev,"resources/symbol%d.png", hraci[hrac]->getSymbol());
+        QPixmap icon2(nazev);
+
+        // paints a midget of icon2 onto icon1
+        icon2 = icon2.scaled(QSize(36,36),Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        QPainter painter(&transPixmap);
+        painter.drawPixmap((transPixmap.width()-icon2.width())/2,(transPixmap.height()-icon2.height())/2,icon2);
+
+
+    QIcon ButtonIcon(transPixmap);
+    ui->card->setIcon(ButtonIcon);
+    ui->card->setIconSize(transPixmap.rect().size());
+
+
+}
+
+
+
 /**
  * Function for changing image on button
  * @param button button I want to change
@@ -161,6 +185,59 @@ void MainWindow::changeIcon(QPushButton *button, const char* path)
     button->setIconSize(pixmap.rect().size());
 }
 
+void MainWindow::spust()
+{
+    pocet_hracu = 0;
+    if(hraci[0] != NULL)
+        delete hraci[0];
+
+    if(hraci[1] != NULL)
+        delete hraci[1];
+
+    if(hraci[2] != NULL)
+        delete hraci[2];
+
+    if(hraci[3] != NULL)
+        delete hraci[3];
+    if (ui->checkBox->isChecked())
+    {
+        hraci[pocet_hracu] = new Player(COLOR_GREEN,mapa);
+        pocet_hracu++;
+    }
+
+    if (ui->checkBox_2->isChecked())
+    {
+        hraci[pocet_hracu] = new Player(COLOR_YELLOW,mapa);
+        pocet_hracu++;
+    }
+    if (ui->checkBox_3->isChecked())
+    {
+        hraci[pocet_hracu] = new Player(COLOR_RED,mapa);
+        pocet_hracu++;
+    }
+    if (ui->checkBox_4->isChecked())
+    {
+        hraci[pocet_hracu] = new Player(COLOR_BLUE,mapa);
+        pocet_hracu++;
+    }
+
+    if(pocet_hracu<3)
+        ui->pushButton->setText("Málo hráčů");
+    else
+    {
+        ui->checkBox->setVisible(false);
+        ui->checkBox_2->setVisible(false);
+        ui->checkBox_3->setVisible(false);
+        ui->checkBox_4->setVisible(false);
+        ui->label_5->setVisible(false);
+        ui->label_6->setVisible(false);
+        ui->spinBox->setVisible(false);
+        ui->spinBox_2->setVisible(false);
+        ui->pushButton->setVisible(false);
+        prekresli();
+    }
+}
+
 /**
  * Function for creating field - buttons for shift,
  * map buttons, score board and right panel with
@@ -168,7 +245,8 @@ void MainWindow::changeIcon(QPushButton *button, const char* path)
  */
 void MainWindow::createField()
 {
-    this->setFixedSize((24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 64 + 32 ),(8 + 24 + 8 + (50*VELIKOST) + 8 + 24 + 8 + 16 + 22));
+    int vyska = 8 + 24 + 8 + (50*VELIKOST) + 8 + 24 + 8 + 16 + 22;
+    this->setFixedSize((24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 64 + 32 ),(vyska));
 
     for(int i = 0; i<VELIKOST; i++)
         for(int j=0; j<VELIKOST; j++)
@@ -227,7 +305,7 @@ void MainWindow::createField()
 
     //ui->scoreBlue->setText(QVariant(24).toString()); //převádění intu na řetězec pro label
     ui->card->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32,20), QSize(64, 128)));
-    ui->card->setPixmap( QPixmap( "resources/card.png" ));
+    changeCard();
 
     ui->rotateR->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20), QSize(48, 24)));
     connect(ui->rotateR, SIGNAL(released()), this, SLOT(handleRotateR()));
@@ -239,6 +317,22 @@ void MainWindow::createField()
 
     ui->square->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4), QSize(48, 48)));
     //ui->square->setPixmap( QPixmap( "resources/square.png"));
-    prekresli();
+
+    ui->spinBox->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, vyska - 76), QSize(48, 24)));
+
+    ui->label_5->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, vyska - 98), QSize(48, 24)));
+
+    ui->spinBox_2->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24, vyska - 76), QSize(48, 24)));
+
+    ui->label_6->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 14, vyska - 98), QSize(68, 24)));
+
+    ui->pushButton->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 27, vyska - 50), QSize(74, 24)));
+
+    ui->checkBox->setGeometry(QRect(QPoint(13, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(20, 20)));
+    ui->checkBox_2->setGeometry(QRect(QPoint(103, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(20, 20)));
+    ui->checkBox_3->setGeometry(QRect(QPoint(186, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(20, 20)));
+    ui->checkBox_4->setGeometry(QRect(QPoint(286, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(20, 20)));
+
+    connect(ui->pushButton, SIGNAL(released()), this, SLOT(spust()));
 
 }
