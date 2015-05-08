@@ -8,7 +8,7 @@
 #include "block.h"
 #include <QLabel>
 
-#define VELIKOST 5
+#define VELIKOST 11
 
 namespace Ui {
 class MainWindow;
