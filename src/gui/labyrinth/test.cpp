@@ -39,6 +39,14 @@ int main(int argc, char* argv[])
 	mapa->shift(2, 1);
 	renderMap(mapa);
 
+	std::cout << "\n Rotate free block right\n";
+	mapa->getFreeBlock()->rotateRight();
+	renderMap(mapa);
+
+	std::cout << "\n Rotate free block right\n";
+	mapa->getFreeBlock()->rotateRight();
+	renderMap(mapa);
+
 	std::cout << "\n Shift 2. column to down\n";
 	mapa->shift(3, 1);
 	renderMap(mapa);
