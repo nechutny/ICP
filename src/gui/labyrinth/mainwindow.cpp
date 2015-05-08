@@ -95,6 +95,7 @@ void MainWindow::prekresli()
 			this->changeBlock(m_button[i][j],kameny[mapa->offset(i,j)]);
 		}
 	this->changeBlock(ui->square,mapa->getFreeBlock());
+	changeCard();
 
 }
 
@@ -156,9 +157,9 @@ void MainWindow::prekresli()
 	QPixmap transPixmap("resources/card.png");
 
 
-		char nazev[40] = "";
-	   if(hraci[hrac] != NULL)
-	   {
+	char nazev[40] = "";
+	if(hraci[hrac] != NULL)
+	{
 		sprintf(nazev,"resources/symbol%d.png", hraci[hrac]->getSymbol());
 		QPixmap icon2(nazev);
 
