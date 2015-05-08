@@ -1,9 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "stdio.h"
-#include "player.h"
-#include "map.h"
-#include "block.h"
+#include "player.cpp"
+#include "map.cpp"
+#include "block.cpp"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,8 +11,13 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    mapa = new Map;
+    mapa->generate(VELIKOST);
+    hraci[0] = new Player(COLOR_RED,mapa);
+    hraci[0] = new Player(COLOR_GREEN,mapa);
+    hraci[0] = new Player(COLOR_BLUE,mapa);
+    hraci[0] = new Player(COLOR_YELLOW,mapa);
     createField();
-
 
 }
 
@@ -76,7 +81,6 @@ void MainWindow::createField()
     for(int i = 0; i<VELIKOST; i++)
         for(int j=0; j<VELIKOST; j++)
         {
-            printf("%d\n",VELIKOST);
         // Create the button, make "this" the parent
            m_button[i][j] = new QPushButton("My Button", this);
            // set size and location of the button
