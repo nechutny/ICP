@@ -100,6 +100,17 @@ void MainWindow::prekresli()
     QTransform trans = transform.rotate((kamen->getRotation()) * 90);
     QPixmap *transPixmap = new QPixmap(pixmap.transformed(trans));
 
+    if(kamen->getSymbol() != 0)
+    {
+        char nazev[40] = "";
+        sprintf(nazev,"resources/symbol%d.png", kamen->getSymbol());
+        QPixmap icon2(nazev);
+
+        // paints a midget of icon2 onto icon1
+        icon2 = icon2.scaled(QSize(28,28),Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        QPainter painter(transPixmap);
+        painter.drawPixmap((transPixmap->width()-icon2.width())/2,(transPixmap->height()-icon2.height())/2,icon2);
+    }
 
 
     QIcon ButtonIcon(*transPixmap);
