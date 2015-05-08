@@ -12,7 +12,12 @@
 #include "player.h"
 #include "map.h"
 
-
+/**
+ * Player constructor
+ *
+ * @param	color	col	Player color
+ * @param	Map*	map	Pointer to map
+ */
 Player::Player(color col,  Map* map)
 {
 	_color = col;
@@ -47,8 +52,8 @@ color Player::getColor()
  *
  * @return	bool	True for succes, False if is turn impossible
  */
- bool Player::move(int x, int y)
- {
+bool Player::move(int x, int y)
+{
 	 // TODO
 	 //_position_x = x;
 	 //_position_y = y;
@@ -67,10 +72,10 @@ color Player::getColor()
 
 	do
 	{
-		printf("examine [%d,%d]\n", pos_x, pos_y);
+		//printf("examine [%d,%d]\n", pos_x, pos_y);
 		if(x == pos_x && y == pos_y)
 		{
-			printf("found [%d,%d]\n",pos_x,pos_y);
+			//printf("found [%d,%d]\n",pos_x,pos_y);
 			delete _open1;
 			delete _open2;
 			free(_close);
@@ -84,53 +89,53 @@ color Player::getColor()
 		Block* blk = blocks[ _map->offset(pos_x, pos_y) ];
 
 		// Right
-		printf("right\n");
+		//printf("right\n");
 		if(pos_y < _map->getSize()-2)
 		{
 			if(blk->toDirection(0) && blocks[ _map->offset(pos_x, pos_y+1)]->fromDirection(2) && _close[ _map->offset(pos_x, pos_y+1) ] == 0)
 			{
 				_open1->push(pos_x);
 				_open2->push(pos_y+1);
-				printf("pushing [%d,%d]\n", pos_x, pos_y+1);
+				//printf("pushing [%d,%d]\n", pos_x, pos_y+1);
 				_close[ _map->offset(pos_x, pos_y+1) ] = 1;
 			}
 		}
 
 		// Up
-		printf("up\n");
+		//printf("up\n");
 		if(pos_x > 0)
 		{
 			if(blk->toDirection(1) && blocks[ _map->offset(pos_x-1, pos_y)]->fromDirection(3)  && _close[ _map->offset(pos_x-1, pos_y) ] == 0)
 			{
 				_open1->push(pos_x-1);
 				_open2->push(pos_y);
-				printf("pushing [%d,%d]\n", pos_x-1, pos_y);
+				//printf("pushing [%d,%d]\n", pos_x-1, pos_y);
 				_close[ _map->offset(pos_x-1, pos_y) ] = 1;
 			}
 		}
 
 		// Left
-		printf("left\n");
+		//printf("left\n");
 		if(pos_y > 0)
 		{
 			if(blk->toDirection(2) && blocks[ _map->offset(pos_x, pos_y-1)]->fromDirection(0)  && _close[ _map->offset(pos_x, pos_y-1) ] == 0)
 			{
 				_open1->push(pos_x);
 				_open2->push(pos_y-1);
-				printf("pushing [%d,%d]\n", pos_x, pos_y-1);
+				//printf("pushing [%d,%d]\n", pos_x, pos_y-1);
 				_close[ _map->offset(pos_x, pos_y-1) ] = 1;
 			}
 		}
 
 		// Down
-		printf("down\n");
+		//printf("down\n");
 		if(pos_x < _map->getSize()-2)
 		{
 			if(blk->toDirection(3) && blocks[ _map->offset(pos_x+1, pos_y)]->fromDirection(1)  && _close[ _map->offset(pos_x+1, pos_y) ] == 0)
 			{
 				_open1->push(pos_x+1);
 				_open2->push(pos_y);
-				printf("pushing [%d,%d]\n", pos_x+1, pos_y);
+				//printf("pushing [%d,%d]\n", pos_x+1, pos_y);
 				_close[ _map->offset(pos_x+1, pos_y) ] = 1;
 			}
 		}
@@ -150,7 +155,7 @@ color Player::getColor()
 	delete _open2;
 	free(_close);
 	return false;
- }
+}
 
 /**
  * Get ID of currently needed symbol
@@ -195,7 +200,7 @@ int Player::getPositionY()
 bool Player::win()
 {
 	// TODO
-	return true;
+	return false;
 }
 
 /**

@@ -23,8 +23,14 @@ class Block
 		Player** _players;
 
 	public:
+		/**
+		 * Block constructor, perform allocations
+		 */
 		Block();
 
+		/**
+		 * Block destructor - deallocate memory
+		 */
 		~Block();
 
 		/**
