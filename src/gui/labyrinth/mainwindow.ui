@@ -1112,17 +1112,17 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="square">
+   <widget class="QPushButton" name="square">
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>390</x>
       <y>190</y>
-      <width>55</width>
-      <height>17</height>
+      <width>85</width>
+      <height>27</height>
      </rect>
     </property>
     <property name="text">
-     <string>square</string>
+     <string/>
     </property>
    </widget>
   </widget>

@@ -5,6 +5,8 @@
 #include <QPushButton>
 #include "player.h"
 #include "map.h"
+#include "block.h"
+#include <QLabel>
 
 #define VELIKOST 11
 
@@ -19,9 +21,15 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void changeBlock(QPushButton *button,Block* kamen);
+    void changeIcon(QPushButton *button,const char* path);
 
 private:
     Ui::MainWindow *ui;
+    Map* mapa;
+    Player* hraci[4];
+    int hrac;
+    bool posunuto;
 
 private slots:
     void handleButton();
@@ -30,15 +38,15 @@ private slots:
     void handleRotateR();
     void handleRotateL();
     void createField();
+    void prekresli();
 
 public:
     QPushButton *m_button[VELIKOST][VELIKOST];
     QPushButton *h_button[VELIKOST/2][1];
     QPushButton *v_button[VELIKOST/2][1];
-    Map* mapa;
-    Player* hraci[4];
 
-    void changeIcon(QPushButton *button,const char* path);
+
+
     //void createField();
 };
 

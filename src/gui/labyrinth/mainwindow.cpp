@@ -4,6 +4,7 @@
 #include "player.cpp"
 #include "map.cpp"
 #include "block.cpp"
+#include <QPainter>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,9 +15,11 @@ MainWindow::MainWindow(QWidget *parent) :
     mapa = new Map;
     mapa->generate(VELIKOST);
     hraci[0] = new Player(COLOR_RED,mapa);
-    hraci[0] = new Player(COLOR_GREEN,mapa);
-    hraci[0] = new Player(COLOR_BLUE,mapa);
-    hraci[0] = new Player(COLOR_YELLOW,mapa);
+    hraci[1] = new Player(COLOR_GREEN,mapa);
+    hraci[2] = new Player(COLOR_BLUE,mapa);
+    hraci[3] = new Player(COLOR_YELLOW,mapa);
+    hrac = 0;
+    posunuto = false;
     createField();
 
 }
@@ -27,32 +30,85 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::handleButton()
-{
+{//button->minimumHeight(),button->minimumWidth()
     QPushButton *button = (QPushButton *)sender(); //do button si ulozim ten objekt, ktery zavolal slot
-
-    // change the text
-    m_button[button->minimumHeight()][button->minimumWidth()]->setText("Exp");
+    if(hraci[hrac]->move(button->minimumHeight(),button->minimumWidth()))
+    {
+        prekresli();
+        hrac = (hrac+1)%4; //potreba upravit pro neplny pocet hracu !!!!!!!!!!!!!!!
+        posunuto = false;
+    }
 }
 
 void MainWindow::handleHShift()
 {
+    if(posunuto)
+        return;
 
+    QPushButton *button = (QPushButton *)sender();
+
+    mapa->shift(button->minimumWidth(),((button->minimumHeight()) * 2)+1);
+    posunuto = true;
+    prekresli();
 }
 
 void MainWindow::handleVShift()
 {
+    if(posunuto)
+        return;
+    QPushButton *button = (QPushButton *)sender();
 
+    mapa->shift(button->minimumWidth(),((button->minimumHeight()) * 2)+1);
+    posunuto = true;
+    prekresli();
 }
 
 void MainWindow::handleRotateR()
 {
-
+    printf("%d\n",mapa->getFreeBlock()->getRotation());
+    mapa->getFreeBlock()->rotateRight();
+    prekresli();
+    //printf("otoceni");
+    printf("%d\n\n",mapa->getFreeBlock()->getRotation());
 }
 
 void MainWindow::handleRotateL()
 {
+    mapa->getFreeBlock()->rotateLeft();
+    prekresli();
+}
+
+void MainWindow::prekresli()
+{
+    // kameny[mapa->offset(i,j)]->getType();
+    Block **kameny = mapa->getMap();
+    for(int i = 0; i<mapa->getSize(); i++)
+        for(int j=0; j<mapa->getSize(); j++)
+        {
+            this->changeBlock(m_button[i][j],kameny[mapa->offset(i,j)]);
+        }
+    this->changeBlock(ui->square,mapa->getFreeBlock());
 
 }
+
+ void MainWindow::changeBlock(QPushButton *button,Block* kamen)
+{
+    int type = kamen->getType();
+    QPixmap pixmap(type == 0 ? "resources/block-L.png" : type == 1 ? "resources/block-T.png" : "resources/block-I.png");
+
+    QTransform transform;
+    QTransform trans = transform.rotate((kamen->getRotation()) * 90);
+    QPixmap *transPixmap = new QPixmap(pixmap.transformed(trans));
+
+
+
+    QIcon ButtonIcon(*transPixmap);
+    button->setIcon(ButtonIcon);
+    button->setIconSize(pixmap.rect().size());
+
+
+}
+
 
 
 /**
@@ -89,6 +145,7 @@ void MainWindow::createField()
            m_button[i][j]->setMinimumWidth(j);
            m_button[i][j]->setText("");
 
+
            // Connect button signal to appropriate slot
            connect(m_button[i][j], SIGNAL(released()), this, SLOT(handleButton()));
 
@@ -106,19 +163,19 @@ void MainWindow::createField()
         h_button[i][1] = new QPushButton("<", this);
         h_button[i][1]->setGeometry(QRect(QPoint(24 + 24 + 24 + 50*VELIKOST + 24, 8 + 24 + 8 + (2*50*i) + 50), QSize(24, 48)));
         h_button[i][1]->setMinimumHeight(i);
-        h_button[i][1]->setMinimumWidth(1);
+        h_button[i][1]->setMinimumWidth(2);
         connect(h_button[i][1], SIGNAL(released()), this, SLOT(handleHShift()));
 
         v_button[i][0] = new QPushButton("\\/", this);
         v_button[i][0]->setGeometry(QRect(QPoint(24 + 24 + 24 + (2*50*i) + 50, 8), QSize(48, 24)));
-        v_button[i][0]->setMinimumHeight(0);
-        v_button[i][0]->setMinimumWidth(i);
+        v_button[i][0]->setMinimumHeight(i);
+        v_button[i][0]->setMinimumWidth(3);
         connect(v_button[i][0], SIGNAL(released()), this, SLOT(handleVShift()));
 
         v_button[i][1] = new QPushButton("/\\", this);
         v_button[i][1]->setGeometry(QRect(QPoint(24 + 24 + 24 + (2*50*i) + 50, 8 + 24 + 8 + 50*VELIKOST + 8), QSize(48, 24)));
-        v_button[i][1]->setMinimumHeight(1);
-        v_button[i][1]->setMinimumWidth(i);
+        v_button[i][1]->setMinimumHeight(i);
+        v_button[i][1]->setMinimumWidth(1);
         connect(v_button[i][1], SIGNAL(released()), this, SLOT(handleVShift()));
     }
 
@@ -145,7 +202,7 @@ void MainWindow::createField()
     changeIcon(ui->rotateL, "resources/rotateL.png");
 
     ui->square->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4), QSize(48, 48)));
-    ui->square->setPixmap( QPixmap( "resources/square.png"));
-    this->repaint();
+    //ui->square->setPixmap( QPixmap( "resources/square.png"));
+    prekresli();
 
 }
