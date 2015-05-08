@@ -127,7 +127,7 @@ void Map::generate(int N)
 	{
 		rand1 = rand()%_size;
 		rand2 = rand()%_size;
-		if((rand1 == 0 && rand2 == 0) || (rand1 == _size-1 && rand2 != 0)  || (rand2 == _size-1 && rand1 != 0) || (rand1 == _size-1 && rand2 == _size-1))
+		if((rand1 == 0 && rand2 == 0) || (rand1 == (unsigned)_size-1 && rand2 != 0)  || (rand2 == (unsigned)_size-1 && rand1 != 0) || (rand1 == (unsigned)_size-1 && rand2 == (unsigned)_size-1))
 		{
 		}
 		else
