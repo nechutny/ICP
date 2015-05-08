@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    tohle = this;
+    connect(ui->pushButton, SIGNAL(released()), tohle, SLOT(createField()));
     mapa = new Map;
     mapa->generate(VELIKOST);
     hraci[0] = new Player(COLOR_RED,mapa);
@@ -20,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     hraci[3] = new Player(COLOR_YELLOW,mapa);
     hrac = 0;
     posunuto = false;
-    createField();
+    //createField();
 
 }
 
@@ -149,7 +151,7 @@ void MainWindow::createField()
         for(int j=0; j<VELIKOST; j++)
         {
         // Create the button, make "this" the parent
-           m_button[i][j] = new QPushButton("My Button", this);
+           m_button[i][j] = new QPushButton("My Button",ui->centralWidget());
            // set size and location of the button
            m_button[i][j]->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*j), 8 + 24 + 8 + (50*i)), QSize(48, 48)));
            m_button[i][j]->setMinimumHeight(i);

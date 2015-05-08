@@ -30,6 +30,7 @@ private:
     Player* hraci[4];
     int hrac;
     bool posunuto;
+    MainWindow *tohle;
 
 private slots:
     void handleButton();

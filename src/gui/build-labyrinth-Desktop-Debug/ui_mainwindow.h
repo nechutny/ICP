@@ -43,6 +43,7 @@ public:
     QPushButton *rotateR;
     QPushButton *rotateL;
     QPushButton *square;
+    QPushButton *pushButton;
     QMenuBar *menuBar;
     QMenu *menuHra;
     QMenu *menuN_pov_da;
@@ -245,6 +246,9 @@ public:
         square = new QPushButton(centralWidget);
         square->setObjectName(QStringLiteral("square"));
         square->setGeometry(QRect(390, 190, 85, 27));
+        pushButton = new QPushButton(centralWidget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(180, 180, 85, 27));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -287,6 +291,7 @@ public:
         rotateR->setText(QString());
         rotateL->setText(QString());
         square->setText(QString());
+        pushButton->setText(QApplication::translate("MainWindow", "Nov\303\241 hra", 0));
         menuHra->setTitle(QApplication::translate("MainWindow", "Hra", 0));
         menuN_pov_da->setTitle(QApplication::translate("MainWindow", "N\303\241pov\304\233da", 0));
     } // retranslateUi
