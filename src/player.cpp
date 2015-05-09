@@ -77,10 +77,10 @@ bool Player::move(int x, int y)
 
 	do
 	{
-		printf("examine [%d,%d]\n", pos_x, pos_y);
+		//printf("examine [%d,%d]\n", pos_x, pos_y);
 		if(x == pos_x && y == pos_y)
 		{
-			printf("found [%d,%d]\n",pos_x,pos_y);
+			//printf("found [%d,%d]\n",pos_x,pos_y);
 			delete _open1;
 			delete _open2;
 			free(_close);
@@ -93,7 +93,7 @@ bool Player::move(int x, int y)
 
 			if(blocks[ _map->offset(x, y) ]->getSymbol() == _symbol)
 			{
-				printf("Nasel symbol\n");
+				//printf("Nasel symbol\n");
 				_symbol = ((_color+(unsigned)rand())%_map->getSymbols())+1;
 				_score++;
 			}
@@ -104,53 +104,53 @@ bool Player::move(int x, int y)
 		Block* blk = blocks[ _map->offset(pos_x, pos_y) ];
 
 		// Right
-		printf("right\n");
+		//printf("right\n");
 		if(pos_y < _map->getSize()-1)
 		{
 			if(blk->toDirection(0) && blocks[ _map->offset(pos_x, pos_y+1)]->fromDirection(2) && _close[ _map->offset(pos_x, pos_y+1) ] == 0)
 			{
 				_open1->push(pos_x);
 				_open2->push(pos_y+1);
-				printf("pushing [%d,%d]\n", pos_x, pos_y+1);
+				//printf("pushing [%d,%d]\n", pos_x, pos_y+1);
 				_close[ _map->offset(pos_x, pos_y+1) ] = 1;
 			}
 		}
 
 		// Up
-		printf("up\n");
+		//printf("up\n");
 		if(pos_x > 0)
 		{
 			if(blk->toDirection(1) && blocks[ _map->offset(pos_x-1, pos_y)]->fromDirection(3)  && _close[ _map->offset(pos_x-1, pos_y) ] == 0)
 			{
 				_open1->push(pos_x-1);
 				_open2->push(pos_y);
-				printf("pushing [%d,%d]\n", pos_x-1, pos_y);
+				//printf("pushing [%d,%d]\n", pos_x-1, pos_y);
 				_close[ _map->offset(pos_x-1, pos_y) ] = 1;
 			}
 		}
 
 		// Left
-		printf("left\n");
+		//printf("left\n");
 		if(pos_y > 0)
 		{
 			if(blk->toDirection(2) && blocks[ _map->offset(pos_x, pos_y-1)]->fromDirection(0)  && _close[ _map->offset(pos_x, pos_y-1) ] == 0)
 			{
 				_open1->push(pos_x);
 				_open2->push(pos_y-1);
-				printf("pushing [%d,%d]\n", pos_x, pos_y-1);
+				//printf("pushing [%d,%d]\n", pos_x, pos_y-1);
 				_close[ _map->offset(pos_x, pos_y-1) ] = 1;
 			}
 		}
 
 		// Down
-		printf("down\n");
+		//printf("down\n");
 		if(pos_x < _map->getSize()-1)
 		{
 			if(blk->toDirection(3) && blocks[ _map->offset(pos_x+1, pos_y)]->fromDirection(1)  && _close[ _map->offset(pos_x+1, pos_y) ] == 0)
 			{
 				_open1->push(pos_x+1);
 				_open2->push(pos_y);
-				printf("pushing [%d,%d]\n", pos_x+1, pos_y);
+				//printf("pushing [%d,%d]\n", pos_x+1, pos_y);
 				_close[ _map->offset(pos_x+1, pos_y) ] = 1;
 			}
 		}
@@ -161,7 +161,7 @@ bool Player::move(int x, int y)
 		}
 		else
 		{
-			printf("Stack size: %ld\n", _open1->size());
+			//printf("Stack size: %ld\n", _open1->size());
 		}
 
 		pos_x = _open1->top();

@@ -241,7 +241,7 @@ void Map::generate(int N, int symbols)
 			}
 			else
 			{
-				printf("map %d %d\n",i,j);
+				//printf("map %d %d\n",i,j);
 				rand1 = rand();
 				rand2 = rand();
 

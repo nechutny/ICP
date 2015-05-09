@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 	mapa->shift(3, 1);
 	renderMap(mapa);
 
-	Player* pl1 = new Player(COLOR_RED, mapa);
+	Player* pl1 = new Player(COLOR_RED, mapa, false);
 
 
 	std::cout << "\n Move player one block right (from 0,0 to 2,2)\n";

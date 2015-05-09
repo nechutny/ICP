@@ -137,9 +137,7 @@ bool Block::isOccupied()
  */
 void Block::rotateLeft()
 {
-	printf("a: %d\n", _rotation);
 	_rotation = (_rotation+1)%4;
-	printf("a: %d\n", _rotation);
 }
 
 /**
@@ -147,9 +145,7 @@ void Block::rotateLeft()
  */
 void Block::rotateRight()
 {
-	printf("b: %d\n", _rotation);
 	_rotation = (_rotation+3)%4;
-	printf("b: %d\n", _rotation);
 }
 
 /**
