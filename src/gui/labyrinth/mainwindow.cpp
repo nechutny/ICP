@@ -195,7 +195,7 @@ void MainWindow::changeIcon(QPushButton *button, const char* path)
 
 void MainWindow::spust()
 {
-	 mapa->generate(7, 12);
+     mapa->generate(ui->spinBox->value(), ui->spinBox_2->value());
 
 	pocet_hracu = 0;
 	if(hraci[0] != NULL)
@@ -244,9 +244,9 @@ void MainWindow::spust()
 		ui->spinBox->setVisible(false);
 		ui->spinBox_2->setVisible(false);
 		ui->pushButton->setVisible(false);
-		prekresli();
 
 
+        prekresli();
 
         int i, j;
 
@@ -255,6 +255,14 @@ void MainWindow::spust()
             {
                 m_button[i][j]->setVisible(true);
             }
+
+        for(int i = 0; i < ((ui->spinBox->value()) / 2); i++)
+        {
+            h_button[i][0]->setVisible(true);
+            h_button[i][1]->setVisible(true);
+            v_button[i][0]->setVisible(true);
+            v_button[i][1]->setVisible(true);
+        }
 
 
 
