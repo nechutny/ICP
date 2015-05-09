@@ -216,10 +216,7 @@ void MainWindow::prekresli()
  * @ param button button where I want piece of map.
  * @ param kamen structure where is type of piece of map.
  */
- void MainWindow::changeBlock(QPushButton *button,Block* kamen)
-=======
 void MainWindow::changeBlock(QPushButton *button,Block* kamen)
->>>>>>> 88decb18279255938ebbf1f395fb4487e68f185d:src/mainwindow.cpp
 {
 	int type = kamen->getType();
 	QPixmap pixmap(type == 0 ? "src/resources/block-L.png" : type == 1 ? "src/resources/block-T.png" : "src/resources/block-I.png");
@@ -269,11 +266,7 @@ void MainWindow::changeBlock(QPushButton *button,Block* kamen)
  /**
   * Change picture on the card to find.
   */
- void MainWindow::changeCard()
-=======
-
 void MainWindow::changeCard()
->>>>>>> 88decb18279255938ebbf1f395fb4487e68f185d:src/mainwindow.cpp
 {
 	QPixmap transPixmap("src/resources/card.png");
 
