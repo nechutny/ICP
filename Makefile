@@ -28,6 +28,9 @@ run: all
 	./labyrinth2015-cli
 	./labyrinth2015
 
+doxygen:
+	#
+
 
 # clean
 clean:
@@ -36,3 +39,4 @@ clean:
 	rm labyrinth2015  -rf
 	rm labyrinth2015-cli  -rf
 	rm src/labyrinth -rf
+	doc/* -rf
