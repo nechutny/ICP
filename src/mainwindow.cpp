@@ -209,7 +209,6 @@ void MainWindow::prekresli()
 
 }
 
-<<<<<<< HEAD:src/gui/labyrinth/mainwindow.cpp
 /**
  * Create piece of map on the button.
  *
@@ -262,7 +261,6 @@ void MainWindow::changeBlock(QPushButton *button,Block* kamen)
 }
 
 
-<<<<<<< HEAD:src/gui/labyrinth/mainwindow.cpp
  /**
   * Change picture on the card to find.
   */
