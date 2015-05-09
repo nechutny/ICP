@@ -167,7 +167,7 @@ bool Map::shift(int direction, int columnRow)
 {
 	Block* tmp;
 
-	if(_last_direction == direction && _last_column == columnRow)
+	if(_last_direction == ((direction+2)%4) && _last_column == columnRow)
 	{
 		return false;
 	}
