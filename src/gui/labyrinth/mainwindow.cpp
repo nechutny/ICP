@@ -5,6 +5,7 @@
 #include "map.cpp"
 #include "block.cpp"
 #include <QPainter>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
@@ -38,9 +39,20 @@ void MainWindow::handleButton()
 	QPushButton *button = (QPushButton *)sender(); //do button si ulozim ten objekt, ktery zavolal slot
 	if(hraci[hrac]->move(button->minimumHeight(),button->minimumWidth()))
 	{
-        int i, skore;
+        int i, skore, barva;
         char stringNum[3];
+        char vitezstvi[150];
 		prekresli();
+
+        if(hraci[hrac]->win())
+        {
+            barva = hraci[hrac]->getColor();
+            QMessageBox msgBox;
+            sprintf(vitezstvi,"Vítězí %s hráč", barva == COLOR_RED ? "ČERVENÝ" : barva == COLOR_YELLOW ? "ŽLUTÝ": barva == COLOR_GREEN ? "ZELENÝ" : "MODRÝ" );
+            msgBox.setText("The document has been modified.");
+            msgBox.exec();
+        }
+
         hrac = (hrac+1)%pocet_hracu;
 
 
@@ -79,6 +91,7 @@ void MainWindow::handleButton()
                     ui->scoreBlue->setText(stringNum);
             }
         }
+
 
 
 

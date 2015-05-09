@@ -7,6 +7,7 @@
 #include "map.h"
 #include "block.h"
 #include <QLabel>
+#include <QMessageBox>
 
 #define VELIKOST 11
 
