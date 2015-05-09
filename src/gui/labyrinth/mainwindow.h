@@ -45,8 +45,8 @@ private slots:
 
 public:
     QPushButton *m_button[VELIKOST][VELIKOST];
-    QPushButton *h_button[VELIKOST/2][1];
-    QPushButton *v_button[VELIKOST/2][1];
+    QPushButton *h_button[VELIKOST/2][2];
+    QPushButton *v_button[VELIKOST/2][2];
 
     void createField();
 
