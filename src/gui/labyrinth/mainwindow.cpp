@@ -76,8 +76,8 @@ void MainWindow::handleHShift()
 
 	QPushButton *button = (QPushButton *)sender();
 
-	mapa->shift(button->minimumWidth(),((button->minimumHeight()) * 2)+1);
-	posunuto = true;
+
+	posunuto = mapa->shift(button->minimumWidth(),((button->minimumHeight()) * 2)+1);
 	prekresli();
 }
 
@@ -87,8 +87,8 @@ void MainWindow::handleVShift()
 		return;
 	QPushButton *button = (QPushButton *)sender();
 
-	mapa->shift(button->minimumWidth(),((button->minimumHeight()) * 2)+1);
-	posunuto = true;
+
+	posunuto = mapa->shift(button->minimumWidth(),((button->minimumHeight()) * 2)+1);
 	prekresli();
 }
 
