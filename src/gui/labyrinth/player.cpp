@@ -18,7 +18,7 @@
  * @param	color	col	Player color
  * @param	Map*	map	Pointer to map
  */
-Player::Player(color col,  Map* map)
+Player::Player(color col,  Map* map, bool notPlaceOnStart)
 {
 	_color = col;
 	_score = 0;
@@ -32,7 +32,10 @@ Player::Player(color col,  Map* map)
 
 	Block** blocks = _map->getMap();
 
-	blocks[ _map->offset(_position_x, _position_y) ]->addPlayer(this);
+	if(!notPlaceOnStart)
+	{
+		blocks[ _map->offset(_position_x, _position_y) ]->addPlayer(this);
+	}
 }
 
 

@@ -29,9 +29,9 @@ class Map
 		/**
 		 * Save map to file for future load
 		 */
-		void save(Player** players, int onTurn, bool posunul);
+		void save(Player** players, int onTurn, bool posunul, bool toFile);
 
-		saveT* load(Player** players, int* onTurn, bool* posunul);
+		saveT* load(Player** players, int* onTurn, bool* posunul, bool fromFile);
 
 		/**
 		 * Generate map

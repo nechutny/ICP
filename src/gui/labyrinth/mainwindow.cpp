@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	hrac = 0;
 	posunuto = false;
+	pocet_hracu = 0;
 	createField();
 
 }
@@ -94,7 +95,7 @@ void MainWindow::handleButton()
 
 
 
-		mapa->save(hraci, hrac, posunuto);
+		mapa->save(hraci, hrac, posunuto, false);
 	}
 	else
 	{
@@ -122,7 +123,7 @@ void MainWindow::handleHShift()
 	}
 	else
 	{
-		mapa->save(hraci, hrac, posunuto);
+		mapa->save(hraci, hrac, posunuto, false);
 	}
 	prekresli();
 }
@@ -144,7 +145,7 @@ void MainWindow::handleVShift()
 	}
 	else
 	{
-		mapa->save(hraci, hrac, posunuto);
+		mapa->save(hraci, hrac, posunuto, false);
 	}
 
 	prekresli();
@@ -153,8 +154,8 @@ void MainWindow::handleVShift()
 void MainWindow::handleRotateR()
 {
 	//printf("%d\n",mapa->getFreeBlock()->getRotation());
+	mapa->save(hraci, hrac, posunuto, false);
 	mapa->getFreeBlock()->rotateRight();
-	mapa->save(hraci, hrac, posunuto);
 	prekresli();
 	//printf("otoceni");
 	//printf("%d\n\n",mapa->getFreeBlock()->getRotation());
@@ -162,8 +163,8 @@ void MainWindow::handleRotateR()
 
 void MainWindow::handleRotateL()
 {
+	mapa->save(hraci, hrac, posunuto, false);
 	mapa->getFreeBlock()->rotateLeft();
-	mapa->save(hraci, hrac, posunuto);
 	prekresli();
 }
 
@@ -294,21 +295,21 @@ void MainWindow::spust()
 
 	if (ui->checkBox_3->isChecked())
 	{
-		hraci[pocet_hracu] = new Player(COLOR_RED,mapa);
+		hraci[pocet_hracu] = new Player(COLOR_RED,mapa,false);
         pocet_hracu++;
         if(pocet_hracu == 1)
             ui->label_3->setText("<u>Červený:</u>");
 	}
 	if (ui->checkBox_4->isChecked())
 	{
-		hraci[pocet_hracu] = new Player(COLOR_BLUE,mapa);
+		hraci[pocet_hracu] = new Player(COLOR_BLUE,mapa, false);
         pocet_hracu++;
         if(pocet_hracu == 1)
             ui->label_4->setText("<u>Modrý:</u>");
 	}
 	if (ui->checkBox->isChecked())
 	{
-		hraci[pocet_hracu] = new Player(COLOR_GREEN,mapa);
+		hraci[pocet_hracu] = new Player(COLOR_GREEN,mapa, false);
         pocet_hracu++;
         if(pocet_hracu == 1)
             ui->label->setText("<u>Zelený:</u>");
@@ -316,7 +317,7 @@ void MainWindow::spust()
 
 	if (ui->checkBox_2->isChecked())
 	{
-		hraci[pocet_hracu] = new Player(COLOR_YELLOW,mapa);
+		hraci[pocet_hracu] = new Player(COLOR_YELLOW,mapa, false);
         pocet_hracu++;
         if(pocet_hracu == 1)
             ui->label_2->setText("<u>Žlutý:</u>");
@@ -375,14 +376,14 @@ void MainWindow::spust()
     ui->pushButton_2->setVisible(true);
     ui->save->setVisible(true);
 
-    mapa->save(hraci, hrac, posunuto);
+    mapa->save(hraci, hrac, posunuto, false);
 
 	}
 }
 
 void MainWindow::undo()
 {
-	if(mapa->load(hraci, &hrac, &posunuto) == NULL)
+	if(mapa->load(hraci, &hrac, &posunuto, false) == NULL)
 	{
 		QMessageBox msgBox;
 		msgBox.setText("Více akcí nejde vrátit zpět.");
@@ -394,12 +395,62 @@ void MainWindow::undo()
 
 void MainWindow::load()
 {
+	mapa->generate(11,24);
+	mapa->load(hraci, &hrac, &posunuto, true);
+
+	while(pocet_hracu < 4 && ((hraci[ pocet_hracu ]) != NULL))
+	{
+		pocet_hracu++;
+	}
+
+	ui->checkBox->setVisible(false);
+		ui->checkBox_2->setVisible(false);
+		ui->checkBox_3->setVisible(false);
+		ui->checkBox_4->setVisible(false);
+		ui->label_5->setVisible(false);
+		ui->label_6->setVisible(false);
+		ui->spinBox->setVisible(false);
+		ui->spinBox_2->setVisible(false);
+		ui->pushButton->setVisible(false);
+        ui->load->setVisible(false);
+
+
+        prekresli();
+
+        int i, j;
+
+        for(i = 0; i < mapa->getSize(); i++)
+            for(j = 0; j < mapa->getSize(); j++)
+            {
+                m_button[i][j]->setVisible(true);
+            }
+
+        for(int i = 0; i < (mapa->getSize() / 2); i++)
+        {
+
+            h_button[i][0]->setVisible(true);
+            h_button[i][1]->setVisible(true);
+            v_button[i][0]->setVisible(true);
+            v_button[i][1]->setVisible(true);
+
+            h_button[i][1]->setGeometry(QRect(QPoint(24 + 24 + 24 + 50*(mapa->getSize()) + 24, 8 + 24 + 8 + (2*50*i) + 50), QSize(24, 48)));
+
+            v_button[i][1]->setGeometry(QRect(QPoint(24 + 24 + 24 + (2*50*i) + 50, 8 + 24 + 8 + 50*(mapa->getSize()) + 8), QSize(48, 24)));
+
+        }
+
+    ui->rotateL->setVisible(true);
+    ui->rotateR->setVisible(true);
+    ui->square->setVisible(true);
+    ui->card->setVisible(true);
+    ui->pushButton_2->setVisible(true);
+    ui->save->setVisible(true);
 
 }
 
 void MainWindow::save()
 {
-
+	mapa->save(hraci, hrac, posunuto, true);
 }
 
 /**

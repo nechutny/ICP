@@ -34,7 +34,7 @@ class Player
 		 * @param	color	col	Player color
 		 * @param	Map*	map	Pointer to map
 		 */
-		Player(color col, Map* map);
+		Player(color col, Map* map, bool notPlaceOnStart);
 
 		/**
 		 * Get player color

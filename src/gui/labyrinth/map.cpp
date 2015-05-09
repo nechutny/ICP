@@ -6,7 +6,7 @@
 #include "save.h"
 
 
-void Map::save(Player** players, int onTurn, bool posunul)
+void Map::save(Player** players, int onTurn, bool posunul, bool toFile)
 {
 	saveT* sav = (saveT*)calloc(sizeof(saveT),1);
 
@@ -27,6 +27,7 @@ void Map::save(Player** players, int onTurn, bool posunul)
 
 	sav->player_on_turn = onTurn;
 	sav->posunul = posunul;
+	sav->size = _size;
 
 	for(int i = 0; i < 4; i++)
 	{
@@ -48,24 +49,47 @@ void Map::save(Player** players, int onTurn, bool posunul)
 		}
 	}
 
-	_save->push(sav);
+	if(toFile)
+	{
+		FILE* fp = fopen("save.dat","w");
+		fwrite(sav, 1, sizeof(saveT), fp);
+		fclose(fp);
+	}
+	else
+	{
+		_save->push(sav);
+	}
 
 }
 
-saveT* Map::load(Player** players, int* onTurn, bool* posunul)
+saveT* Map::load(Player** players, int* onTurn, bool* posunul, bool fromFile)
 {
-	if(_save->size() == 0)
+	saveT* sav;
+
+	if(fromFile)
 	{
-		printf("Jiz nejde vratit\n");
-		return NULL;
+		sav = (saveT*)calloc(sizeof(saveT),1);
+		FILE* fp = fopen("save.dat","r");
+		fread(sav, 1, sizeof(saveT), fp);
+		fclose(fp);
 	}
-	saveT* sav = _save->top();
-	_save->pop();
+	else
+	{
+		if(_save->size() == 0)
+		{
+			printf("Jiz nejde vratit\n");
+			return NULL;
+		}
+		sav = _save->top();
+		_save->pop();
+	}
 
 
 	_freeBlock->setType((block_type)sav->freeBlockType);
 	_freeBlock->setRotation(sav->freeBlockRotation);
 	_freeBlock->setSymbol(sav->freeBlockSymbol);
+	_size = sav->size;
+
 	int off = 0;
 	for(int i = 0; i < getSize(); i++)
 	{
@@ -87,6 +111,10 @@ saveT* Map::load(Player** players, int* onTurn, bool* posunul)
 		printf("Obnovit %d (%d) na [%d,%d]\n", sav->playerSymbol[i], sav->playerColor[i], sav->playerPosX[i], sav->playerPosY[i]);
 		if(sav->playerSymbol[i] != 0)
 		{
+			if(fromFile)
+			{
+				players[i] = new Player((color)sav->playerColor[i], this, true);
+			}
 			players[i]->setPosition(sav->playerPosX[i], sav->playerPosY[i]);
 			players[i]->setScore(sav->playerScore[i]);
 			players[i]->setSymbol(sav->playerSymbol[i]);
