@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	hraci[1] = NULL;
 	hraci[2] = NULL;
 	hraci[3] = NULL;
-    mapa = new Map;
+	mapa = new Map;
 
     //mapa->generate(7, 12);
 
@@ -195,6 +195,8 @@ void MainWindow::changeIcon(QPushButton *button, const char* path)
 
 void MainWindow::spust()
 {
+	 mapa->generate(7, 12);
+
 	pocet_hracu = 0;
 	if(hraci[0] != NULL)
 		delete hraci[0];
@@ -244,7 +246,7 @@ void MainWindow::spust()
 		ui->pushButton->setVisible(false);
 		prekresli();
 
-        mapa->generate(7, 12);
+
 
         int i, j;
 

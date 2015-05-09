@@ -24,7 +24,7 @@ Player::Player(color col,  Map* map)
 	_score = 0;
 	_position_x = (col%2 == 0) ? 0 : map->getSize()-1;
 	_position_y = (col < 2) ? 0 : map->getSize()-1;
-	_symbol = 1;
+	_symbol = ((_color+(unsigned)rand())%12)+1;
 	_id = col;
 	_map = map;
 
@@ -85,6 +85,12 @@ bool Player::move(int x, int y)
 
 			_position_x = x;
 			_position_y = y;
+
+			if(blocks[ _map->offset(x, y) ]->getSymbol() == _symbol)
+			{
+				_symbol = ((_color+(unsigned)rand())%12)+1;
+				_score++;
+			}
 
 			return true;
 		}
@@ -149,7 +155,7 @@ bool Player::move(int x, int y)
 		}
 		else
 		{
-			printf("Stack size: %d\n", _open1->size());
+			printf("Stack size: %ld\n", _open1->size());
 		}
 
 		pos_x = _open1->top();
