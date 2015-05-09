@@ -314,6 +314,14 @@ void MainWindow::changeIcon(QPushButton *button, const char* path)
  */
 void MainWindow::spust()
 {
+	if(ui->spinBox->value() == 5 && ui->spinBox_2->value() == 24)
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Pro velikost 5x5 není možné hrát s 24 symboly.");
+		msgBox.exec();
+
+		return;
+	}
 	mapa->generate(ui->spinBox->value(), ui->spinBox_2->value());
 
 	pocet_hracu = 0;
