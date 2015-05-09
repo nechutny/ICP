@@ -1,7 +1,8 @@
- /**
+/**
  * Data types
  *
  * @author	Stanislav Nechutný - xnechu01
+ * @author	Miloš Smutka - xsmutk00
  */
 #ifndef TYPES_H
 #define TYPES_H

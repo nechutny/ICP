@@ -2,6 +2,7 @@
  * Player
  *
  * @author	Stanislav Nechutný - xnechu01
+ * @author	Miloš Smutka - xsmutk00
  */
 
 #include <stdbool.h>
@@ -15,8 +16,9 @@
 /**
  * Player constructor
  *
- * @param	color	col	Player color
- * @param	Map*	map	Pointer to map
+ * @param	color	col		Player color
+ * @param	Map*	map		Pointer to map
+ * @param	bool	notPlaceOnStart	True for not placing player on start position
  */
 Player::Player(color col,  Map* map, bool notPlaceOnStart)
 {
@@ -49,6 +51,7 @@ color Player::getColor()
 	return _color;
 }
 
+
 /**
  * Move player to new positon
  *
@@ -79,7 +82,7 @@ bool Player::move(int x, int y)
 	{
 		//printf("examine [%d,%d]\n", pos_x, pos_y);
 		if(x == pos_x && y == pos_y)
-		{
+		{ // found way to move
 			//printf("found [%d,%d]\n",pos_x,pos_y);
 			delete _open1;
 			delete _open2;
@@ -156,7 +159,7 @@ bool Player::move(int x, int y)
 		}
 
 		if(_open1->size() == 0)
-		{
+		{ // no way
 			break;
 		}
 		else
@@ -176,6 +179,7 @@ bool Player::move(int x, int y)
 	return false;
 }
 
+
 /**
  * Get ID of currently needed symbol
  *
@@ -186,10 +190,17 @@ int Player::getSymbol()
 	return _symbol;
 }
 
+
+/**
+ * Set searching symbol for player
+ *
+ * @param	int	symbol	ID of symbol to find
+ */
 void Player::setSymbol(int symbol)
 {
 	_symbol = symbol;
 }
+
 
 /**
  * Get player score
@@ -201,13 +212,20 @@ int Player::getScore()
 	return _score;
 }
 
+
+/**
+ * Set player's score
+ *
+ * @param	int	score	Score to be set
+ */
 void Player::setScore(int score)
 {
 	_score = score;
 }
 
+
 /**
- * Get player position (X/Y)
+ * Get player position X
  *
  * @return	int Position
  */
@@ -216,16 +234,30 @@ int Player::getPositionX()
 	return _position_x;
 }
 
+
+/**
+ * Get player position Y
+ *
+ * @return	int Position
+ */
 int Player::getPositionY()
 {
 	return _position_y;
 }
 
+
+/**
+ * Set player position
+ *
+ * @param	int	x	Position X
+ * @param	int	y	Position Y
+ */
 void Player::setPosition(int x, int y)
 {
 	_position_x = x;
 	_position_y = y;
 }
+
 
 /**
  * Does player win game?
@@ -236,6 +268,7 @@ bool Player::win()
 {
 	return (_map->getSymbols()/_map->getPlayers() <= _score);
 }
+
 
 /**
  * Set player color
@@ -258,6 +291,7 @@ int Player::getId()
 	return _id;
 }
 
+
 /**
  * Set player ID
  *
@@ -267,6 +301,7 @@ void Player::setId(int id)
 {
 	_id = id;
 }
+
 
 /**
  * Inject pointer to map

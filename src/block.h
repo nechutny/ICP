@@ -2,6 +2,7 @@
  * Block
  *
  * @author	Stanislav Nechutný - xnechu01
+ * @author	Miloš Smutka - xsmutk00
  */
 #ifndef BLOCK_H
 #define BLOCK_H
@@ -76,6 +77,10 @@ class Block
 		 */
 		void setPlayers(Player** players);
 
+
+		/**
+		 * Remove all players from this block
+		 */
 		void resetPlayers();
 
 		/**
@@ -106,7 +111,7 @@ class Block
 		/**
 		 * Place player on block
 		 *
-		 * @param	Player*	player	Player to be added
+		 * @param	Player	*player	Player to be added
 		 */
 		void addPlayer(Player* player);
 
@@ -116,7 +121,6 @@ class Block
 		 * @param	int	playerId	Playerd id
 		 */
 		void removePlayer(int playerId);
-
 
 		/**
 		 * Set block type
@@ -132,9 +136,29 @@ class Block
 		 */
 		void setSymbol(int symbol);
 
+		/**
+		 * Check if is possible to go from block to given direction
+		 *
+		 * @param	int	direction	Direction to go
+		 *
+		 * @return	bool	TRUE for success, FALSE for failure
+		 */
 		bool toDirection(int direction);
+
+		/**
+		 * Check if is possible to go to block from given direction
+		 *
+		 * @param	int	direction	Direction to go
+		 *
+		 * @return	bool	TRUE for success, FALSE for failure
+		 */
 		bool fromDirection(int direction);
 
+		/**
+		 * Function returning UTF-8 encoded character for CLI drwaing
+		 *
+		 * @return	std::string	Character to display
+		 */
 		std::string toChar();
 };
 #endif

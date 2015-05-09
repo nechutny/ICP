@@ -2,6 +2,7 @@
  * Block
  *
  * @author	Stanislav Nechutný - xnechu01
+ * @author	Miloš Smutka - xsmutk00
  */
 
 #include <iostream>
@@ -11,6 +12,7 @@
 #include "types.h"
 #include "player.h"
 #include "block.h"
+
 
 /**
  * Block constructor, perform allocations
@@ -47,6 +49,7 @@ int Block::getRotation()
 	return _rotation;
 }
 
+
 /**
  * Set block rotation
  *
@@ -56,6 +59,7 @@ void Block::setRotation(int rot)
 {
 	_rotation = rot;
 }
+
 
 /**
  * Get block type
@@ -67,6 +71,7 @@ block_type Block::getType()
 	return _type;
 }
 
+
 /**
  * Get symbol from block
  *
@@ -76,6 +81,7 @@ int Block::getSymbol()
 {
 	return _symbol;
 }
+
 
 /**
  * Get array of players on block
@@ -87,6 +93,7 @@ Player** Block::getPlayers()
 	return _players;
 }
 
+
 /**
  * Set array of players on block
  *
@@ -97,10 +104,15 @@ void Block::setPlayers(Player** players)
 	_players = players;
 }
 
+
+/**
+ * Remove all players from this block
+ */
 void Block::resetPlayers()
 {
 	_players[0] = _players[1] = _players[2] = _players[3] = NULL;
 }
+
 
 /**
  * Inform players about move
@@ -122,6 +134,7 @@ void Block::informMoved(int x, int y)
 	}
 }
 
+
 /**
  * Check, if is any players standing on this block
  *
@@ -132,6 +145,7 @@ bool Block::isOccupied()
 	return (_players[0] != NULL || _players[1] != NULL || _players[2] != NULL || _players[3] != NULL);
 }
 
+
 /**
  * Rotate block left
  */
@@ -140,6 +154,7 @@ void Block::rotateLeft()
 	_rotation = (_rotation+1)%4;
 }
 
+
 /**
  * Rotate block right
  */
@@ -147,6 +162,7 @@ void Block::rotateRight()
 {
 	_rotation = (_rotation+3)%4;
 }
+
 
 /**
  * Place player on block
@@ -157,6 +173,7 @@ void Block::addPlayer(Player* player)
 {
 	_players[player->getColor()] = player;
 }
+
 
 /**
  * Remove player from block
@@ -179,6 +196,7 @@ void Block::setType(block_type type)
 	_type = type;
 }
 
+
 /**
  * Set block symbol
  *
@@ -189,6 +207,14 @@ void Block::setSymbol(int symbol)
 	_symbol = symbol;
 }
 
+
+/**
+ * Check if is possible to go from block to given direction
+ *
+ * @param	int	direction	Direction to go
+ *
+ * @return	bool	TRUE for success, FALSE for failure
+ */
 bool Block::toDirection(int direction)
 {
 	int rotation = getRotation();
@@ -206,11 +232,26 @@ bool Block::toDirection(int direction)
 
 	return false;
 }
+
+
+/**
+ * Check if is possible to go to block from given direction
+ *
+ * @param	int	direction	Direction to go
+ *
+ * @return	bool	TRUE for success, FALSE for failure
+ */
 bool Block::fromDirection(int direction)
 {
 	return toDirection(direction);
 }
 
+
+/**
+ * Function returning UTF-8 encoded character for CLI drwaing
+ *
+ * @return	std::string	Character to display
+ */
 std::string Block::toChar()
 {
 	switch(getType())

@@ -1,7 +1,8 @@
 /**
- * Main window
+ * Main Window
  *
- * @author	Miloslav Smutka - XSMUTK00
+ * @author	Stanislav Nechutný - xnechu01
+ * @author	Miloš Smutka - xsmutk00
  */
 
 #ifndef MAINWINDOW_H

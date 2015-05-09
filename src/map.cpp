@@ -1,3 +1,10 @@
+/**
+ * Map
+ *
+ * @author	Stanislav Nechutný - xnechu01
+ * @author	Miloš Smutka - xsmutk00
+ */
+
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,6 +13,14 @@
 #include "save.h"
 
 
+/**
+ * Save current state for load/unbo
+ *
+ * @param	Player**	players	Pinter to array of players for read their state (position, score, color etc.)
+ * @param	int		onTurn	Number of player on turn
+ * @param	bool		posunul	Did player shift card in this turn?
+ * @param	bool		toFile	Save to file for future load, or just into stack for undo
+ */
 void Map::save(Player** players, int onTurn, bool posunul, bool toFile)
 {
 	saveT* sav = (saveT*)calloc(sizeof(saveT),1);
@@ -63,12 +78,23 @@ void Map::save(Player** players, int onTurn, bool posunul, bool toFile)
 
 }
 
+
+/**
+ * Load previous state from file/undo buffer
+ *
+ * @param	Player**	players		Pinter to array of players for setting their state (position, score, color etc.)
+ * @param	int*		onTurn		Number of player on turn
+ * @param	bool*		posunul		Did player shift card in this turn?
+ * @param	bool		fromFile	Load from file or just from stack for undo
+ *
+ * @return	saveT*	Pointer to loaded structure with data, or NULL if fail
+ */
 saveT* Map::load(Player** players, int* onTurn, bool* posunul, bool fromFile)
 {
 	saveT* sav;
 
 	if(fromFile)
-	{
+	{ // read from file
 		sav = (saveT*)calloc(sizeof(saveT),1);
 		FILE* fp = fopen("save.dat","r");
 		int foo = fread(sav, 1, sizeof(saveT), fp);
@@ -95,7 +121,7 @@ saveT* Map::load(Player** players, int* onTurn, bool* posunul, bool fromFile)
 
 	int off = 0;
 	for(int i = 0; i < getSize(); i++)
-	{
+	{ // restore blocks
 		for(int j = 0; j < getSize(); j++)
 		{
 			off = offset(i,j);
@@ -110,7 +136,7 @@ saveT* Map::load(Player** players, int* onTurn, bool* posunul, bool fromFile)
 	*posunul = sav->posunul;
 
 	for(int i = 0; i < 4; i++)
-	{
+	{ // restore players
 		printf("Obnovit %d (%d) na [%d,%d]\n", sav->playerSymbol[i], sav->playerColor[i], sav->playerPosX[i], sav->playerPosY[i]);
 		if(sav->playerSymbol[i] != 0)
 		{
@@ -131,6 +157,10 @@ saveT* Map::load(Player** players, int* onTurn, bool* posunul, bool fromFile)
 	return sav;
 }
 
+
+/**
+ * Free allocated memory
+ */
 Map::~Map()
 {
 	for(int  i = 0; i < _size; i++)
@@ -146,20 +176,44 @@ Map::~Map()
 	free(_map);
 }
 
+
+/**
+ * Get number of symbols (12/24)
+ *
+ * @return	int	Number of symbols on map
+ */
 int Map::getSymbols()
 {
 	return _symbols;
 }
+
+
+/**
+ * Get number of players on map
+ *
+ * @return	int	Number of players on map
+ */
 int Map::getPlayers()
 {
 	return _players;
 }
+
+
+/**
+ * Increase counter of players on map
+ */
 void Map::incPlayer()
 {
 	_players++;
 }
 
 
+/**
+ * Generate map
+ *
+ * @param	int	N	Size of map (odd number 5-11)
+ * @param	int	symbols	Number of symbols
+ */
 void Map::generate(int N, int symbols)
 {
 	_save = new std::stack<saveT*>;
@@ -180,7 +234,7 @@ void Map::generate(int N, int symbols)
 	tmp->setRotation(3);
 	_map[ offset(0,0) ] = tmp;
 
-
+	// Corners
 	tmp = new Block;
 	tmp->setType(TYPE_L);
 	tmp->setRotation(2);
@@ -196,6 +250,7 @@ void Map::generate(int N, int symbols)
 	tmp->setRotation(0);
 	_map[ offset(N-1,0) ] = tmp;
 
+	// Borders (odd)
 	for(int i = 2; i < N-1; i += 2)
 	{
 		tmp = new Block;
@@ -231,6 +286,7 @@ void Map::generate(int N, int symbols)
 	unsigned rand1 = rand(), rand2 = rand();
 	unsigned type = 1;
 
+	// Remaining empty blocks
 	for(int  i = 0; i < N; i++)
 	{
 		for(int j = 0; j < N; j++)
@@ -260,16 +316,18 @@ void Map::generate(int N, int symbols)
 		}
 	}
 
+	// Free block for shifting
 	_freeBlock = new Block;
 	_freeBlock->setType((block_type)type);
 	_freeBlock->setRotation((type+rand1) % 4 );
 
+	// Add symbols
 	while(true)
 	{
 		rand1 = rand()%_size;
 		rand2 = rand()%_size;
 		if((rand1 == 0 && rand2 == 0) || (rand1 == (unsigned)_size-1 && rand2 == 0)  || (rand2 == (unsigned)_size-1 && rand1 == 0) || (rand1 == (unsigned)_size-1 && rand2 == (unsigned)_size-1))
-		{
+		{ // Don't place symbols on corners
 		}
 		else
 		{
@@ -284,29 +342,45 @@ void Map::generate(int N, int symbols)
 			}
 		}
 	}
-
-
 }
 
 
+/**
+ * Get map size
+ *
+ * @return	int	Map size
+ */
 int Map::getSize()
 {
 	return _size;
 }
 
 
+/**
+ * Get map in 2 dimensional array
+ *
+ * @return	Block**	Pointer to 2D array of blocks
+ */
 Block** Map::getMap()
 {
 	return _map;
 }
 
 
+/**
+ * Shift map
+ *
+ * @param	int	direction	0 ... right, 1 ... up, 2 ... left, 3 ... down
+ * @param	int	columnRow	Index of collumn, or row to be shifted
+ *
+ * @return	bool	True for success, false for fail (reverse sihft)
+ */
 bool Map::shift(int direction, int columnRow)
 {
 	Block* tmp;
 
 	if(_last_direction == ((direction+2)%4) && _last_column == columnRow)
-	{
+	{ // Shifting is revesring last done shift
 		return false;
 	}
 	else
@@ -414,16 +488,25 @@ bool Map::shift(int direction, int columnRow)
 }
 
 
+/**
+ * Get free block
+ *
+ * @return	Block*	Free block, which can be used for shifting
+ */
 Block* Map::getFreeBlock()
 {
 	return _freeBlock;
 }
 
-int Map::getMaxSymbolsCount()
-{
-	return 42;
-}
 
+/**
+ * Calculate offset for block array
+ *
+ * @param	int	x	Row number from 0
+ * @param	int	y	Column number from 0
+ *
+ * @return	int	Offset, or -1 for out of range
+ */
 int Map::offset(int x, int y)
 {
 	if(x >= _size || y >= _size)

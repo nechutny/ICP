@@ -2,6 +2,7 @@
  * Player
  *
  * @author	Stanislav Nechutný - xnechu01
+ * @author	Miloš Smutka - xsmutk00
  */
 #ifndef PLAYER_H
 #define PLAYER_H
@@ -28,11 +29,11 @@ class Player
 
 
 	public:
-		/**
-		 * Player constructor
+		/** Player constructor
 		 *
-		 * @param	color	col	Player color
-		 * @param	Map*	map	Pointer to map
+		 * @param	color	col		Player color
+		 * @param	Map*	map		Pointer to map
+		 * @param	bool	notPlaceOnStart	True for not placing player on start position
 		 */
 		Player(color col, Map* map, bool notPlaceOnStart);
 
@@ -59,6 +60,12 @@ class Player
 		 * @return	int	ID of symbol, or 0 for nothing
 		 */
 		int getSymbol();
+
+		/**
+		 * Set searching symbol for player
+		 *
+		 * @param	int	symbol	ID of symbol to find
+		 */
 		void setSymbol(int symbol);
 
 		/**
@@ -67,22 +74,33 @@ class Player
 		 * @return	int	Player score
 		 */
 		int getScore();
+
+		/**
+		 * Set player's score
+		 *
+		 * @param	int	score	Score to be set
+		 */
 		void setScore(int score);
 
 		/**
-		 * Get player position (X/Y)
+		 * Get player position X
 		 *
 		 * @return	int Position
 		 */
 		int getPositionX();
-		int getPositionY();
-
 
 		/**
-		 * Set player position (X/Y)
+		 * Get player position X
 		 *
-		 * @paream	int	x	X position
-		 * @paream	int	y	Y position
+		 * @return	int Position
+		 */
+		int getPositionY();
+
+		/**
+		 * Set player position
+		 *
+		 * @param	int	x	Position X
+		 * @param	int	y	Position Y
 		 */
 		void setPosition(int x, int y);
 

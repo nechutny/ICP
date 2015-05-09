@@ -1,7 +1,8 @@
- /**
- * Data types
+/**
+ * Structure for undo and save/load
  *
  * @author	Stanislav Nechutný - xnechu01
+ * @author	Miloš Smutka - xsmutk00
  */
 #ifndef SAVE_H
 #define SAVE_H

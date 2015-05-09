@@ -2,6 +2,7 @@
  * Map
  *
  * @author	Stanislav Nechutný - xnechu01
+ * @author	Miloš Smutka - xsmutk00
  */
 #ifndef MAP_H
 #define MAP_H
@@ -24,13 +25,32 @@ class Map
 		std::stack<saveT*>* _save;
 
 	public:
+		/**
+		 * Free allocated memory
+		 */
 		~Map();
 
 		/**
-		 * Save map to file for future load
+		 * Save current state for load/unbo
+		 *
+		 * @param	Player**	players	Pinter to array of players for read their state (position, score, color etc.)
+		 * @param	int		onTurn	Number of player on turn
+		 * @param	bool		posunul	Did player shift card in this turn?
+		 * @param	bool		toFile	Save to file for future load, or just into stack for undo
 		 */
 		void save(Player** players, int onTurn, bool posunul, bool toFile);
 
+
+		/**
+		 * Load previous state from file/undo buffer
+		 *
+		 * @param	Player**	players		Pinter to array of players for setting their state (position, score, color etc.)
+		 * @param	int*		onTurn		Number of player on turn
+		 * @param	bool*		posunul		Did player shift card in this turn?
+		 * @param	bool		fromFile	Load from file or just from stack for undo
+		 *
+		 * @return	saveT*	Pointer to loaded structure with data, or NULL if fail
+		 */
 		saveT* load(Player** players, int* onTurn, bool* posunul, bool fromFile);
 
 		/**
@@ -40,7 +60,6 @@ class Map
 		 * @param	int	symbols	Number of symbols
 		 */
 		void generate(int N, int symbols);
-
 
 		/**
 		 * Get map size
@@ -73,16 +92,24 @@ class Map
 		 */
 		Block* getFreeBlock();
 
+		/**
+		 * Get number of symbols (12/24)
+		 *
+		 * @return	int	Number of symbols on map
+		 */
 		int getSymbols();
-		int getPlayers();
-		void incPlayer();
 
 		/**
-		 * Get number of required symbols for win
+		 * Get number of players on map
 		 *
-		 * @return	int	Count
+		 * @return	int	Number of players on map
 		 */
-		int getMaxSymbolsCount();
+		int getPlayers();
+
+		/**
+		 * Increase counter of players on map
+		 */
+		void incPlayer();
 
 		/**
 		 * Calculate offset for block array
