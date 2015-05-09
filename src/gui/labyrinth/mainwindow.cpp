@@ -259,6 +259,7 @@ void MainWindow::spust()
 
         for(int i = 0; i < ((ui->spinBox->value()) / 2); i++)
         {
+
             h_button[i][0]->setVisible(true);
             h_button[i][1]->setVisible(true);
             v_button[i][0]->setVisible(true);
@@ -293,7 +294,7 @@ void MainWindow::createField()
 		   m_button[i][j]->setMinimumHeight(i);
 		   m_button[i][j]->setMinimumWidth(j);
 		   m_button[i][j]->setText("");
-           m_button[i][j]->setVisible(false);
+		   m_button[i][j]->setVisible(false);
 
 
 		   // Connect button signal to appropriate slot
@@ -309,28 +310,28 @@ void MainWindow::createField()
 		h_button[i][0]->setMinimumHeight(i);
 		h_button[i][0]->setMinimumWidth(0);
 		connect(h_button[i][0], SIGNAL(released()), this, SLOT(handleHShift()));
-        h_button[i][0]->setVisible(false);
+		h_button[i][0]->setVisible(false);
 
 		h_button[i][1] = new QPushButton("<", this);
 		h_button[i][1]->setGeometry(QRect(QPoint(24 + 24 + 24 + 50*VELIKOST + 24, 8 + 24 + 8 + (2*50*i) + 50), QSize(24, 48)));
 		h_button[i][1]->setMinimumHeight(i);
 		h_button[i][1]->setMinimumWidth(2);
 		connect(h_button[i][1], SIGNAL(released()), this, SLOT(handleHShift()));
-        h_button[i][1]->setVisible(false);
+		h_button[i][1]->setVisible(false);
 
 		v_button[i][0] = new QPushButton("\\/", this);
 		v_button[i][0]->setGeometry(QRect(QPoint(24 + 24 + 24 + (2*50*i) + 50, 8), QSize(48, 24)));
 		v_button[i][0]->setMinimumHeight(i);
 		v_button[i][0]->setMinimumWidth(3);
 		connect(v_button[i][0], SIGNAL(released()), this, SLOT(handleVShift()));
-        v_button[i][0]->setVisible(false);
+		v_button[i][0]->setVisible(false);
 
 		v_button[i][1] = new QPushButton("/\\", this);
 		v_button[i][1]->setGeometry(QRect(QPoint(24 + 24 + 24 + (2*50*i) + 50, 8 + 24 + 8 + 50*VELIKOST + 8), QSize(48, 24)));
 		v_button[i][1]->setMinimumHeight(i);
 		v_button[i][1]->setMinimumWidth(1);
 		connect(v_button[i][1], SIGNAL(released()), this, SLOT(handleVShift()));
-        v_button[i][1]->setVisible(false);
+		v_button[i][1]->setVisible(false);
 	}
 
 	ui->label->setGeometry(QRect(QPoint(35, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(51, 17)));
