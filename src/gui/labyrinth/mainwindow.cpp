@@ -38,10 +38,30 @@ void MainWindow::handleButton()
 	QPushButton *button = (QPushButton *)sender(); //do button si ulozim ten objekt, ktery zavolal slot
 	if(hraci[hrac]->move(button->minimumHeight(),button->minimumWidth()))
 	{
+        int i, skore;
+        char stringNum[3];
 		prekresli();
 		hrac = (hrac+1)%pocet_hracu; //potreba upravit pro neplny pocet hracu !!!!!!!!!!!!!!!
 		posunuto = false;
 		changeCard();
+
+        for(i = 0; i < 4; i++)
+        {
+            if(hraci[i]->getScore() != NULL)
+            {
+                skore = hraci[i]->getScore();
+                sprintf(stringNum, "%d", skore);
+
+                if(hraci[i]->getColor() == COLOR_GREEN)
+                    ui->label->setText(stringNum);
+                if(hraci[i]->getColor() == COLOR_YELLOW)
+                    ui->label_2->setText(stringNum);
+                if(hraci[i]->getColor() == COLOR_RED)
+                    ui->label_3->setText(stringNum);
+                if(hraci[i]->getColor() == COLOR_BLUE)
+                    ui->label_4->setText(stringNum);
+            }
+        }
 	}
 	else
 	{
