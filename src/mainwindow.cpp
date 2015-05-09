@@ -7,6 +7,9 @@
 #include <QPainter>
 #include <QMessageBox>
 
+/**
+ * Construct main window
+ */
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow)
@@ -29,11 +32,18 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 
+/**
+ * Destruct main window
+ */
 MainWindow::~MainWindow()
 {
 	delete ui;
 }
 
+/**
+ * Function for handle player movement on the map.
+ * Also changing active player.
+ */
 void MainWindow::handleButton()
 {//button->minimumHeight(),button->minimumWidth()
 
@@ -106,6 +116,9 @@ void MainWindow::handleButton()
 	}
 }
 
+/**
+ * Function that shift rows on map.
+ */
 void MainWindow::handleHShift()
 {
 	if(posunuto)
@@ -128,6 +141,9 @@ void MainWindow::handleHShift()
 	prekresli();
 }
 
+/**
+ * Shift columns.
+ */
 void MainWindow::handleVShift()
 {
 	if(posunuto)
@@ -151,6 +167,9 @@ void MainWindow::handleVShift()
 	prekresli();
 }
 
+/**
+ * Rotate free block to the right.
+ */
 void MainWindow::handleRotateR()
 {
 	//printf("%d\n",mapa->getFreeBlock()->getRotation());
@@ -161,6 +180,9 @@ void MainWindow::handleRotateR()
 	//printf("%d\n\n",mapa->getFreeBlock()->getRotation());
 }
 
+/**
+ * Rotate free block to the right.
+ */
 void MainWindow::handleRotateL()
 {
 	mapa->save(hraci, hrac, posunuto, false);
@@ -168,6 +190,9 @@ void MainWindow::handleRotateL()
 	prekresli();
 }
 
+/**
+ * Repaint whole map, card and free piece.
+ */
 void MainWindow::prekresli()
 {
 	// kameny[mapa->offset(i,j)]->getType();
@@ -184,6 +209,13 @@ void MainWindow::prekresli()
 
 }
 
+<<<<<<< HEAD:src/gui/labyrinth/mainwindow.cpp
+/**
+ * Create piece of map on the button.
+ *
+ * @ param button button where I want piece of map.
+ * @ param kamen structure where is type of piece of map.
+ */
 void MainWindow::changeBlock(QPushButton *button,Block* kamen)
 {
 	int type = kamen->getType();
@@ -232,7 +264,10 @@ void MainWindow::changeBlock(QPushButton *button,Block* kamen)
 }
 
 
-
+<<<<<<< HEAD:src/gui/labyrinth/mainwindow.cpp
+ /**
+  * Change picture on the card to find.
+  */
 void MainWindow::changeCard()
 {
 	QPixmap transPixmap("src/resources/card.png");
@@ -269,6 +304,9 @@ void MainWindow::changeIcon(QPushButton *button, const char* path)
 	button->setIconSize(pixmap.rect().size());
 }
 
+/**
+ * Start the game
+ */
 void MainWindow::spust()
 {
 	mapa->generate(ui->spinBox->value(), ui->spinBox_2->value());
@@ -374,6 +412,9 @@ void MainWindow::spust()
 	}
 }
 
+/**
+ * Makes the undo feature.
+ */
 void MainWindow::undo()
 {
 	if(mapa->load(hraci, &hrac, &posunuto, false) == NULL)
@@ -386,6 +427,9 @@ void MainWindow::undo()
 	changeCard();
 }
 
+/**
+ * Load saved game
+ */
 void MainWindow::load()
 {
 	mapa->generate(11,24);
@@ -439,6 +483,9 @@ void MainWindow::load()
 	ui->save->setVisible(true);
 }
 
+/**
+ * Save the current game.
+ */
 void MainWindow::save()
 {
 	mapa->save(hraci, hrac, posunuto, true);
