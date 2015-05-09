@@ -52,6 +52,12 @@ int main(int argc, char* argv[])
 	renderMap(mapa);
 
 	Player* pl1 = new Player(COLOR_RED, mapa, false);
+	Player* pls[4];
+
+	pls[0] = pl1;
+	pls[1] = pls[2] = pls[3] = NULL;
+	int on_turn = 0;
+	bool posunul = false;
 
 
 	std::cout << "\n Move player one block right (from 0,0 to 2,2)\n";
@@ -63,6 +69,18 @@ int main(int argc, char* argv[])
 	{
 		std::cout << "Fail\n";
 	}
+
+	std::cout << "\n\nSave map\n";
+	mapa->save((Player**)pls, on_turn,  posunul, false);
+
+	std::cout << "Shift map 2 times\n";
+	mapa->shift(3, 1);
+	mapa->shift(3, 1);
+	renderMap(mapa);
+
+	std::cout << "Restore map\n";
+	mapa->load((Player**)pls, &on_turn,  &posunul, false);
+	renderMap(mapa);
 
 	delete pl1;
 
