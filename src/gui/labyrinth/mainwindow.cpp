@@ -41,6 +41,7 @@ void MainWindow::handleButton()
 		prekresli();
 		hrac = (hrac+1)%pocet_hracu; //potreba upravit pro neplny pocet hracu !!!!!!!!!!!!!!!
 		posunuto = false;
+		changeCard();
 	}
 	else
 	{
