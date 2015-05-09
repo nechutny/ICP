@@ -297,6 +297,7 @@ void MainWindow::spust()
 		ui->spinBox->setVisible(false);
 		ui->spinBox_2->setVisible(false);
 		ui->pushButton->setVisible(false);
+        ui->load->setVisible(false);
 
 
         prekresli();
@@ -328,11 +329,22 @@ void MainWindow::spust()
     ui->square->setVisible(true);
     ui->card->setVisible(true);
     ui->pushButton_2->setVisible(true);
+    ui->save->setVisible(true);
 
 	}
 }
 
 void MainWindow::undo()
+{
+
+}
+
+void MainWindow::load()
+{
+
+}
+
+void MainWindow::save()
 {
 
 }
@@ -445,8 +457,16 @@ void MainWindow::createField()
     ui->pushButton_2->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8 - 18, 20 + 128 + 20 + 24 + 4 + 48 + 4 + 27 + 8), QSize(85, 27)));
     ui->pushButton_2->setVisible(false);
 
+    ui->load->setGeometry(QRect(QPoint((24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 5)/2, (vyska - 50)/2 + 50 + 24 + 8), QSize(74, 24)));
+
+    ui->save->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8 - 18, 20 + 128 + 20 + 24 + 4 + 48 + 4 + 27 + 8 + 27 + 8), QSize(85, 27)));
+    ui->save->setVisible(false);
+
 	connect(ui->pushButton, SIGNAL(released()), this, SLOT(spust()));
     connect(ui->pushButton_2, SIGNAL(released()), this, SLOT(undo()));
+    connect(ui->load, SIGNAL(released()), this, SLOT(load()));
+    connect(ui->save, SIGNAL(released()), this, SLOT(save()));
+
 
 
 }

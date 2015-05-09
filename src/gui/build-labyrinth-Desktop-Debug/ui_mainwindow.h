@@ -53,6 +53,8 @@ public:
     QCheckBox *checkBox_3;
     QCheckBox *checkBox_4;
     QPushButton *pushButton_2;
+    QPushButton *load;
+    QPushButton *save;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -290,6 +292,12 @@ public:
         pushButton_2 = new QPushButton(centralWidget);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
         pushButton_2->setGeometry(QRect(390, 310, 85, 27));
+        load = new QPushButton(centralWidget);
+        load->setObjectName(QStringLiteral("load"));
+        load->setGeometry(QRect(150, 220, 85, 27));
+        save = new QPushButton(centralWidget);
+        save->setObjectName(QStringLiteral("save"));
+        save->setGeometry(QRect(390, 340, 85, 27));
         MainWindow->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -327,6 +335,8 @@ public:
         checkBox_3->setText(QString());
         checkBox_4->setText(QString());
         pushButton_2->setText(QApplication::translate("MainWindow", "Vr\303\241tit akci", 0));
+        load->setText(QApplication::translate("MainWindow", "Na\304\215\303\255st hru", 0));
+        save->setText(QApplication::translate("MainWindow", "Ulo\305\276it hru", 0));
     } // retranslateUi
 
 };
