@@ -29,7 +29,11 @@ run: all
 	./labyrinth2015
 
 doxygen:
-	#
+	-mkdir doc
+	doxygen src/doxygen.conf
+
+pack: clean
+	zip xnechu01-xsmutk00.zip Makefile src doc save.dat LICENSE README.txt
 
 
 # clean
@@ -39,4 +43,5 @@ clean:
 	rm labyrinth2015  -rf
 	rm labyrinth2015-cli  -rf
 	rm src/labyrinth -rf
-	doc/* -rf
+	rm doc/* -rf
+	rm -rf xnechu01-xsmutk00.zip
