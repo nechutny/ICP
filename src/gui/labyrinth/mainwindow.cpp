@@ -264,6 +264,11 @@ void MainWindow::spust()
             h_button[i][1]->setVisible(true);
             v_button[i][0]->setVisible(true);
             v_button[i][1]->setVisible(true);
+
+            h_button[i][1]->setGeometry(QRect(QPoint(24 + 24 + 24 + 50*(ui->spinBox->value()) + 24, 8 + 24 + 8 + (2*50*i) + 50), QSize(24, 48)));
+
+            v_button[i][1]->setGeometry(QRect(QPoint(24 + 24 + 24 + (2*50*i) + 50, 8 + 24 + 8 + 50*(ui->spinBox->value()) + 8), QSize(48, 24)));
+
         }
 
     ui->rotateL->setVisible(true);
