@@ -16,10 +16,10 @@
 /**
  * Save current state for load/unbo
  *
- * @param	Player**	players	Pinter to array of players for read their state (position, score, color etc.)
- * @param	int		onTurn	Number of player on turn
- * @param	bool		posunul	Did player shift card in this turn?
- * @param	bool		toFile	Save to file for future load, or just into stack for undo
+ * @param	players	Pinter to array of players for read their state (position, score, color etc.)
+ * @param	onTurn	Number of player on turn
+ * @param	posunul	Did player shift card in this turn?
+ * @param	toFile	Save to file for future load, or just into stack for undo
  */
 void Map::save(Player** players, int onTurn, bool posunul, bool toFile)
 {
@@ -82,12 +82,12 @@ void Map::save(Player** players, int onTurn, bool posunul, bool toFile)
 /**
  * Load previous state from file/undo buffer
  *
- * @param	Player**	players		Pinter to array of players for setting their state (position, score, color etc.)
- * @param	int*		onTurn		Number of player on turn
- * @param	bool*		posunul		Did player shift card in this turn?
- * @param	bool		fromFile	Load from file or just from stack for undo
+ * @param	players		Pinter to array of players for setting their state (position, score, color etc.)
+ * @param	onTurn		Number of player on turn
+ * @param	posunul		Did player shift card in this turn?
+ * @param	fromFile	Load from file or just from stack for undo
  *
- * @return	saveT*	Pointer to loaded structure with data, or NULL if fail
+ * @return	Pointer to loaded structure with data, or NULL if fail
  */
 saveT* Map::load(Player** players, int* onTurn, bool* posunul, bool fromFile)
 {
@@ -180,7 +180,7 @@ Map::~Map()
 /**
  * Get number of symbols (12/24)
  *
- * @return	int	Number of symbols on map
+ * @return	Number of symbols on map
  */
 int Map::getSymbols()
 {
@@ -191,7 +191,7 @@ int Map::getSymbols()
 /**
  * Get number of players on map
  *
- * @return	int	Number of players on map
+ * @return	Number of players on map
  */
 int Map::getPlayers()
 {
@@ -211,8 +211,8 @@ void Map::incPlayer()
 /**
  * Generate map
  *
- * @param	int	N	Size of map (odd number 5-11)
- * @param	int	symbols	Number of symbols
+ * @param	N	Size of map (odd number 5-11)
+ * @param	symbols	Number of symbols
  */
 void Map::generate(int N, int symbols)
 {
@@ -348,7 +348,7 @@ void Map::generate(int N, int symbols)
 /**
  * Get map size
  *
- * @return	int	Map size
+ * @return	Map size
  */
 int Map::getSize()
 {
@@ -359,7 +359,7 @@ int Map::getSize()
 /**
  * Get map in 2 dimensional array
  *
- * @return	Block**	Pointer to 2D array of blocks
+ * @return	Pointer to 2D array of blocks
  */
 Block** Map::getMap()
 {
@@ -370,10 +370,10 @@ Block** Map::getMap()
 /**
  * Shift map
  *
- * @param	int	direction	0 ... right, 1 ... up, 2 ... left, 3 ... down
- * @param	int	columnRow	Index of collumn, or row to be shifted
+ * @param	direction	0 ... right, 1 ... up, 2 ... left, 3 ... down
+ * @param	columnRow	Index of collumn, or row to be shifted
  *
- * @return	bool	True for success, false for fail (reverse sihft)
+ * @return	True for success, false for fail (reverse sihft)
  */
 bool Map::shift(int direction, int columnRow)
 {
@@ -491,7 +491,7 @@ bool Map::shift(int direction, int columnRow)
 /**
  * Get free block
  *
- * @return	Block*	Free block, which can be used for shifting
+ * @return	Free block, which can be used for shifting
  */
 Block* Map::getFreeBlock()
 {
@@ -502,10 +502,10 @@ Block* Map::getFreeBlock()
 /**
  * Calculate offset for block array
  *
- * @param	int	x	Row number from 0
- * @param	int	y	Column number from 0
+ * @param	x	Row number from 0
+ * @param	y	Column number from 0
  *
- * @return	int	Offset, or -1 for out of range
+ * @return	Offset, or -1 for out of range
  */
 int Map::offset(int x, int y)
 {

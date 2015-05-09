@@ -16,9 +16,9 @@
 /**
  * Player constructor
  *
- * @param	color	col		Player color
- * @param	Map*	map		Pointer to map
- * @param	bool	notPlaceOnStart	True for not placing player on start position
+ * @param	col		Player color
+ * @param	map		Pointer to map
+ * @param	notPlaceOnStart	True for not placing player on start position
  */
 Player::Player(color col,  Map* map, bool notPlaceOnStart)
 {
@@ -44,7 +44,7 @@ Player::Player(color col,  Map* map, bool notPlaceOnStart)
 /**
  * Get player color
  *
- * @return color	Player color
+ * @return	Player color
  */
 color Player::getColor()
 {
@@ -55,10 +55,10 @@ color Player::getColor()
 /**
  * Move player to new positon
  *
- * @param	int	x	X coordinate of new position
- * @param	int	y	Y coordinate of new position
+ * @param	x	X coordinate of new position
+ * @param	y	Y coordinate of new position
  *
- * @return	bool	True for succes, False if is turn impossible
+ * @return	True for succes, False if is turn impossible
  */
 bool Player::move(int x, int y)
 {
@@ -183,7 +183,7 @@ bool Player::move(int x, int y)
 /**
  * Get ID of currently needed symbol
  *
- * @return	int	ID of symbol, or 0 for nothing
+ * @return	ID of symbol, or 0 for nothing
  */
 int Player::getSymbol()
 {
@@ -194,7 +194,7 @@ int Player::getSymbol()
 /**
  * Set searching symbol for player
  *
- * @param	int	symbol	ID of symbol to find
+ * @param	symbol	ID of symbol to find
  */
 void Player::setSymbol(int symbol)
 {
@@ -205,7 +205,7 @@ void Player::setSymbol(int symbol)
 /**
  * Get player score
  *
- * @return	int	Player score
+ * @return	Player score
  */
 int Player::getScore()
 {
@@ -216,7 +216,7 @@ int Player::getScore()
 /**
  * Set player's score
  *
- * @param	int	score	Score to be set
+ * @param	score	Score to be set
  */
 void Player::setScore(int score)
 {
@@ -227,7 +227,7 @@ void Player::setScore(int score)
 /**
  * Get player position X
  *
- * @return	int Position
+ * @return	Position
  */
 int Player::getPositionX()
 {
@@ -238,7 +238,7 @@ int Player::getPositionX()
 /**
  * Get player position Y
  *
- * @return	int Position
+ * @return	Position
  */
 int Player::getPositionY()
 {
@@ -249,8 +249,8 @@ int Player::getPositionY()
 /**
  * Set player position
  *
- * @param	int	x	Position X
- * @param	int	y	Position Y
+ * @param	x	Position X
+ * @param	y	Position Y
  */
 void Player::setPosition(int x, int y)
 {
@@ -262,7 +262,7 @@ void Player::setPosition(int x, int y)
 /**
  * Does player win game?
  *
- * @return	bool	Win
+ * @return	Win
  */
 bool Player::win()
 {
@@ -273,7 +273,7 @@ bool Player::win()
 /**
  * Set player color
  *
- * @param	color	playerColor	Player color
+ * @param	playerColor	Player color
  */
 void Player::setColor(color playerColor)
 {
@@ -284,7 +284,7 @@ void Player::setColor(color playerColor)
 /**
  * Get player ID
  *
- * @return	int	ID of player
+ * @return	ID of player
  */
 int Player::getId()
 {
@@ -295,7 +295,7 @@ int Player::getId()
 /**
  * Set player ID
  *
- * @param	int	id	User id
+ * @param	id	User id
  */
 void Player::setId(int id)
 {
@@ -306,7 +306,7 @@ void Player::setId(int id)
 /**
  * Inject pointer to map
  *
- * @param	Map*	map	Map pointer
+ * @param	map	Map pointer
  */
 void Player::injectMap(Map* map)
 {

@@ -217,8 +217,8 @@ void MainWindow::prekresli()
 /**
  * Create piece of map on the button.
  *
- * @param	QPushButton*	button	where I want piece of map.
- * @param	Block*		kamen	structure where is type of piece of map.
+ * @param	button	where I want piece of map.
+ * @param	kamen	structure where is type of piece of map.
  */
 void MainWindow::changeBlock(QPushButton *button,Block* kamen)
 {
@@ -295,8 +295,8 @@ void MainWindow::changeCard()
 
 /**
 * Function for changing image on button
-* @param QPushButton*	button	I want to change
-* @param char*		path	is path to image that will be on the button
+* @param button	I want to change
+* @param path	is path to image that will be on the button
 */
 void MainWindow::changeIcon(QPushButton *button, const char* path)
 {

@@ -37,35 +37,35 @@ class Block
 		/**
 		 * Get block rotation
 		 *
-		 * @return	int	Number 0-3, radians in positive direction of rotation
+		 * @return	Number 0-3, radians in positive direction of rotation
 		 */
 		int getRotation();
 
 		/**
 		 * Set block rotation
 		 *
-		 * @param	int	rot	Number 0-3, radians in positive direction of rotation
+		 * @param	rot	Number 0-3, radians in positive direction of rotation
 		 */
 		void setRotation(int rot);
 
 		/**
 		 * Get block type
 		 *
-		 * @return	block_type	L, T, I
+		 * @return	L, T, I
 		 */
 		block_type getType();
 
 		/**
 		 * Get symbol from block
 		 *
-		 * @return	int	0 for no symbol, or symbol ID
+		 * @return	0 for no symbol, or symbol ID
 		 */
 		int getSymbol();
 
 		/**
 		 * Get array of players on block
 		 *
-		 * @return	void**	Pointer to array
+		 * @return	Pointer to array
 		 */
 		Player** getPlayers();
 
@@ -73,7 +73,7 @@ class Block
 		/**
 		 * Set array of players on block
 		 *
-		 * @param	Player**	players	Pointer to array
+		 * @param	players	Pointer to array
 		 */
 		void setPlayers(Player** players);
 
@@ -86,15 +86,15 @@ class Block
 		/**
 		 * Check, if is any players standing on this block
 		 *
-		 * @return	bool	True for player, false = empty
+		 * @return	True for player, false = empty
 		 */
 		bool isOccupied();
 
 		/**
 		 * Inform players about move
 		 *
-		 * @param	int	x	X positon
-		 * @param	int	y	Y position
+		 * @param	x	X positon
+		 * @param	y	Y position
 		 */
 		void informMoved(int x, int y);
 
@@ -111,53 +111,53 @@ class Block
 		/**
 		 * Place player on block
 		 *
-		 * @param	Player	*player	Player to be added
+		 * @param	player	Player to be added
 		 */
 		void addPlayer(Player* player);
 
 		/**
 		 * Remove player from block
 		 *
-		 * @param	int	playerId	Playerd id
+		 * @param	playerId	Playerd id
 		 */
 		void removePlayer(int playerId);
 
 		/**
 		 * Set block type
 		 *
-		 * @param	block_type	type	Block type (L, T, I)
+		 * @param	type	Block type (L, T, I)
 		 */
 		void setType(block_type type);
 
 		/**
 		 * Set block symbol
 		 *
-		 * @param	int	symbol	Symbol ID, or 0 for nothing
+		 * @param	symbol	Symbol ID, or 0 for nothing
 		 */
 		void setSymbol(int symbol);
 
 		/**
 		 * Check if is possible to go from block to given direction
 		 *
-		 * @param	int	direction	Direction to go
+		 * @param	direction	Direction to go
 		 *
-		 * @return	bool	TRUE for success, FALSE for failure
+		 * @return	TRUE for success, FALSE for failure
 		 */
 		bool toDirection(int direction);
 
 		/**
 		 * Check if is possible to go to block from given direction
 		 *
-		 * @param	int	direction	Direction to go
+		 * @param	direction	Direction to go
 		 *
-		 * @return	bool	TRUE for success, FALSE for failure
+		 * @return	TRUE for success, FALSE for failure
 		 */
 		bool fromDirection(int direction);
 
 		/**
 		 * Function returning UTF-8 encoded character for CLI drwaing
 		 *
-		 * @return	std::string	Character to display
+		 * @return	Character to display
 		 */
 		std::string toChar();
 };
