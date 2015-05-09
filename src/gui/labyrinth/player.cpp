@@ -221,7 +221,7 @@ void Player::setPosition(int x, int y)
  */
 bool Player::win()
 {
-	return (_map->getSymbols()/_map->getPlayers() < _score);
+	return (_map->getSymbols()/_map->getPlayers() <= _score);
 }
 
 /**

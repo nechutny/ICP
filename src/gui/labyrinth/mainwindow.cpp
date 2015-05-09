@@ -49,7 +49,7 @@ void MainWindow::handleButton()
             barva = hraci[hrac]->getColor();
             QMessageBox msgBox;
             sprintf(vitezstvi,"Vítězí %s hráč", barva == COLOR_RED ? "ČERVENÝ" : barva == COLOR_YELLOW ? "ŽLUTÝ": barva == COLOR_GREEN ? "ZELENÝ" : "MODRÝ" );
-            msgBox.setText("The document has been modified.");
+            msgBox.setText(vitezstvi);
             msgBox.exec();
         }
 
@@ -98,6 +98,9 @@ void MainWindow::handleButton()
 	}
 	else
 	{
+		QMessageBox msgBox;
+		msgBox.setText("Tah na toto pole není možný.");
+		msgBox.exec();
 		printf("Hrac %d nemuze jet na %d %d\n",hrac,button->minimumHeight(),button->minimumWidth());
 	}
 }
@@ -111,6 +114,12 @@ void MainWindow::handleHShift()
 
 
 	posunuto = mapa->shift(button->minimumWidth(),((button->minimumHeight()) * 2)+1);
+	if(!posunuto)
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Není možné posunem zrušit předchozí posuv.");
+		msgBox.exec();
+	}
 	prekresli();
 }
 
@@ -122,6 +131,14 @@ void MainWindow::handleVShift()
 
 
 	posunuto = mapa->shift(button->minimumWidth(),((button->minimumHeight()) * 2)+1);
+
+	if(!posunuto)
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Není možné posunem zrušit předchozí posuv.");
+		msgBox.exec();
+	}
+
 	prekresli();
 }
 
@@ -298,7 +315,11 @@ void MainWindow::spust()
 
 
 	if(pocet_hracu<2)
-		ui->pushButton->setText("Málo hráčů");
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Nedostatek hráčů. Minimální počet je 2..");
+		msgBox.exec();
+	}
 	else
 	{
 		ui->checkBox->setVisible(false);
