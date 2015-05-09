@@ -16,6 +16,8 @@ class Map
 		Block* _freeBlock;
 		Block** _map;
 		int _size;
+		int _symbols;
+		int _players;
 		int _last_direction;
 		int _last_column;
 
@@ -66,6 +68,10 @@ class Map
 		 * @return	Block*	Free block, which can be used for shifting
 		 */
 		Block* getFreeBlock();
+
+		int getSymbols();
+		int getPlayers();
+		void incPlayer();
 
 		/**
 		 * Get number of required symbols for win

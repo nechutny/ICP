@@ -25,11 +25,26 @@ Map::~Map()
 	free(_map);
 }
 
+int Map::getSymbols()
+{
+	return _symbols;
+}
+int Map::getPlayers()
+{
+	return _players;
+}
+void Map::incPlayer()
+{
+	_players++;
+}
+
 
 void Map::generate(int N, int symbols)
 {
 	_last_direction = 0;
 	_last_column = 0;
+	_symbols = symbols;
+	_players = 0;
 
 	srand (time(NULL));
 

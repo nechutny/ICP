@@ -28,6 +28,8 @@ Player::Player(color col,  Map* map)
 	_id = col;
 	_map = map;
 
+	_map->incPlayer();
+
 	Block** blocks = _map->getMap();
 
 	blocks[ _map->offset(_position_x, _position_y) ]->addPlayer(this);
@@ -219,8 +221,7 @@ void Player::setPosition(int x, int y)
  */
 bool Player::win()
 {
-	// TODO
-	return false;
+	return (_map->getSymbols()/_map->getPlayers() < _score);
 }
 
 /**

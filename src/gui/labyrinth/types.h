@@ -1,4 +1,4 @@
-/**
+ /**
  * Data types
  *
  * @author	Stanislav Nechutný - xnechu01
