@@ -88,6 +88,7 @@ bool Player::move(int x, int y)
 
 			if(blocks[ _map->offset(x, y) ]->getSymbol() == _symbol)
 			{
+				printf("Nasel symbol\n");
 				_symbol = ((_color+(unsigned)rand())%12)+1;
 				_score++;
 			}
@@ -203,6 +204,12 @@ int Player::getPositionX()
 int Player::getPositionY()
 {
 	return _position_y;
+}
+
+void Player::setPosition(int x, int y)
+{
+	_position_x = x;
+	_position_y = y;
 }
 
 /**

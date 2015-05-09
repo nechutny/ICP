@@ -28,6 +28,9 @@ Map::~Map()
 
 void Map::generate(int N, int symbols)
 {
+	_last_direction = 0;
+	_last_column = 0;
+
 	srand (time(NULL));
 
 	_map = (Block**)malloc( sizeof(Block*) *N*N );
@@ -160,9 +163,19 @@ Block** Map::getMap()
 }
 
 
-void Map::shift(int direction, int columnRow)
+bool Map::shift(int direction, int columnRow)
 {
 	Block* tmp;
+
+	if(_last_direction == direction && _last_column == columnRow)
+	{
+		return false;
+	}
+	else
+	{
+		_last_direction = direction;
+		_last_column = columnRow;
+	}
 
 	switch(direction)
 	{
@@ -172,9 +185,19 @@ void Map::shift(int direction, int columnRow)
 			for(int i = _size-2; i >= 0; i--)
 			{
 				_map[ offset(columnRow, i+1) ] = _map[ offset(columnRow, i) ];
+				_map[ offset(columnRow, i+1) ]->informMoved(columnRow, i+1);
 			}
 
 			_map[ offset(columnRow, 0) ] = _freeBlock;
+
+			if(tmp->isOccupied())
+			{
+				Player** pls = tmp->getPlayers();
+				tmp->informMoved(columnRow, 0);
+				tmp->setPlayers(_freeBlock->getPlayers());
+				_freeBlock->setPlayers(pls);
+
+			}
 
 			_freeBlock = tmp;
 
@@ -186,9 +209,18 @@ void Map::shift(int direction, int columnRow)
 			for(int i = 1; i < _size; i++)
 			{
 				_map[ offset(i-1, columnRow) ] = _map[ offset(i, columnRow) ];
+				_map[ offset(i-1, columnRow) ]->informMoved(i-1, columnRow);
 			}
 
 			_map[ offset(_size-1, columnRow) ] = _freeBlock;
+
+			if(tmp->isOccupied())
+			{
+				Player** pls = tmp->getPlayers();
+				tmp->informMoved(_size-1, columnRow);
+				tmp->setPlayers(_freeBlock->getPlayers());
+				_freeBlock->setPlayers(pls);
+			}
 
 			_freeBlock = tmp;
 
@@ -200,9 +232,18 @@ void Map::shift(int direction, int columnRow)
 			for(int i = 1; i < _size; i++)
 			{
 				_map[ offset(columnRow, i-1) ] = _map[ offset(columnRow, i) ];
+				_map[ offset(columnRow, i-1) ]->informMoved(columnRow, i-1);
 			}
 
 			_map[ offset(columnRow, _size-1) ] = _freeBlock;
+
+			if(tmp->isOccupied())
+			{
+				Player** pls = tmp->getPlayers();
+				tmp->informMoved(columnRow, _size-1);
+				tmp->setPlayers(_freeBlock->getPlayers());
+				_freeBlock->setPlayers(pls);
+			}
 
 			_freeBlock = tmp;
 
@@ -213,14 +254,25 @@ void Map::shift(int direction, int columnRow)
 			for(int i = _size-2; i >= 0; i--)
 			{
 				_map[ offset(i+1, columnRow) ] = _map[ offset(i, columnRow) ];
+				_map[ offset(i+1, columnRow) ]->informMoved(i+1, columnRow);
 			}
 
 			_map[ offset(0, columnRow) ] = _freeBlock;
+
+			if(tmp->isOccupied())
+			{
+				Player** pls = tmp->getPlayers();
+				tmp->informMoved(0, columnRow);
+				tmp->setPlayers(_freeBlock->getPlayers());
+				_freeBlock->setPlayers(pls);
+			}
 
 			_freeBlock = tmp;
 
 			break;
 	}
+
+	return true;
 }
 
 
