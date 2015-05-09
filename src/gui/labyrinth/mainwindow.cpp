@@ -41,7 +41,24 @@ void MainWindow::handleButton()
         int i, skore;
         char stringNum[3];
 		prekresli();
-		hrac = (hrac+1)%pocet_hracu; //potreba upravit pro neplny pocet hracu !!!!!!!!!!!!!!!
+        hrac = (hrac+1)%pocet_hracu;
+
+
+        ui->label->setText("Zelený:");
+        ui->label_2->setText("Žlutý:");
+        ui->label_3->setText("Červený:");
+        ui->label_4->setText("Modrý:");
+
+        if(hraci[hrac]->getColor() == COLOR_GREEN)
+            ui->label->setText("<u>Zelený:</u>");
+        if(hraci[hrac]->getColor() == COLOR_YELLOW)
+            ui->label_2->setText("<u>Žlutý:</u>");
+        if(hraci[hrac]->getColor() == COLOR_RED)
+            ui->label_3->setText("<u>Červený:</u>");
+        if(hraci[hrac]->getColor() == COLOR_BLUE)
+            ui->label_4->setText("<u>Modrý:</u>");
+
+
 		posunuto = false;
 		changeCard();
 
@@ -62,6 +79,9 @@ void MainWindow::handleButton()
                     ui->scoreBlue->setText(stringNum);
             }
         }
+
+
+
 	}
 	else
 	{
@@ -231,26 +251,35 @@ void MainWindow::spust()
 	if(hraci[3] != NULL)
 		delete hraci[3];
 
+
 	if (ui->checkBox_3->isChecked())
 	{
 		hraci[pocet_hracu] = new Player(COLOR_RED,mapa);
-		pocet_hracu++;
+        pocet_hracu++;
+        if(pocet_hracu == 1)
+            ui->label_3->setText("<u>Červený:</u>");
 	}
 	if (ui->checkBox_4->isChecked())
 	{
 		hraci[pocet_hracu] = new Player(COLOR_BLUE,mapa);
-		pocet_hracu++;
+        pocet_hracu++;
+        if(pocet_hracu == 1)
+            ui->label_4->setText("<u>Modrý:</u>");
 	}
 	if (ui->checkBox->isChecked())
 	{
 		hraci[pocet_hracu] = new Player(COLOR_GREEN,mapa);
-		pocet_hracu++;
+        pocet_hracu++;
+        if(pocet_hracu == 1)
+            ui->label->setText("<u>Zelený:</u>");
 	}
 
 	if (ui->checkBox_2->isChecked())
 	{
 		hraci[pocet_hracu] = new Player(COLOR_YELLOW,mapa);
-		pocet_hracu++;
+        pocet_hracu++;
+        if(pocet_hracu == 1)
+            ui->label_2->setText("<u>Žlutý:</u>");
 	}
 
 
@@ -362,16 +391,16 @@ void MainWindow::createField()
 		v_button[i][1]->setVisible(false);
 	}
 
-    ui->label_3->setGeometry(QRect(QPoint(35, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(51, 17)));
-    ui->label_4->setGeometry(QRect(QPoint(125, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(51, 17)));
-    ui->label->setGeometry(QRect(QPoint(205, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(58, 17)));
-    ui->label_2->setGeometry(QRect(QPoint(305, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(51, 17)));
+    ui->label_3->setGeometry(QRect(QPoint(35, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 6), QSize(56, 17)));
+    ui->label_4->setGeometry(QRect(QPoint(125, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 6), QSize(51, 17)));
+    ui->label->setGeometry(QRect(QPoint(205, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 6), QSize(58, 17)));
+    ui->label_2->setGeometry(QRect(QPoint(305, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 6), QSize(51, 17)));
 
 
-    ui->scoreRed->setGeometry(QRect(QPoint(90, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(25, 17)));
-    ui->scoreBlue->setGeometry(QRect(QPoint(170, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(25, 17)));
-    ui->scoreGreen->setGeometry(QRect(QPoint(270, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(25, 17)));
-    ui->scoreYellow->setGeometry(QRect(QPoint(356, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(25, 17)));
+    ui->scoreRed->setGeometry(QRect(QPoint(93, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 6), QSize(25, 17)));
+    ui->scoreBlue->setGeometry(QRect(QPoint(173, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 6), QSize(25, 17)));
+    ui->scoreGreen->setGeometry(QRect(QPoint(256, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 6), QSize(25, 17)));
+    ui->scoreYellow->setGeometry(QRect(QPoint(345, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 6), QSize(25, 17)));
 
 	//ui->scoreBlue->setText(QVariant(24).toString()); //převádění intu na řetězec pro label
 	ui->card->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32,20), QSize(64, 128)));
@@ -402,11 +431,12 @@ void MainWindow::createField()
 
     ui->pushButton->setGeometry(QRect(QPoint((24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 5)/2, (vyska - 50)/2 + 50), QSize(74, 24)));
 
-    ui->checkBox_3->setGeometry(QRect(QPoint(13, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(20, 20)));
-    ui->checkBox_4->setGeometry(QRect(QPoint(103, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(20, 20)));
-    ui->checkBox->setGeometry(QRect(QPoint(186, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(20, 20)));
-    ui->checkBox_2->setGeometry(QRect(QPoint(286, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(20, 20)));
+    ui->checkBox_3->setGeometry(QRect(QPoint(13, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 5), QSize(20, 20)));
+    ui->checkBox_4->setGeometry(QRect(QPoint(103, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 5), QSize(20, 20)));
+    ui->checkBox->setGeometry(QRect(QPoint(186, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 5), QSize(20, 20)));
+    ui->checkBox_2->setGeometry(QRect(QPoint(286, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 5), QSize(20, 20)));
 
 	connect(ui->pushButton, SIGNAL(released()), this, SLOT(spust()));
+
 
 }

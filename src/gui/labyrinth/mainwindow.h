@@ -33,6 +33,8 @@ private:
     int pocet_hracu;
     bool posunuto;
 
+
+
 private slots:
     void handleButton();
     void handleHShift();
