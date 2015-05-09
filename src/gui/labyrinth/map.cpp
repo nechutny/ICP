@@ -28,6 +28,9 @@ Map::~Map()
 
 void Map::generate(int N, int symbols)
 {
+	_last_direction = 0;
+	_last_column = 0;
+
 	srand (time(NULL));
 
 	_map = (Block**)malloc( sizeof(Block*) *N*N );
@@ -160,9 +163,19 @@ Block** Map::getMap()
 }
 
 
-void Map::shift(int direction, int columnRow)
+bool Map::shift(int direction, int columnRow)
 {
 	Block* tmp;
+
+	if(_last_direction == direction && _last_column == columnRow)
+	{
+		return false;
+	}
+	else
+	{
+		_last_direction = direction;
+		_last_column = columnRow;
+	}
 
 	switch(direction)
 	{
@@ -258,6 +271,8 @@ void Map::shift(int direction, int columnRow)
 
 			break;
 	}
+
+	return true;
 }
 
 

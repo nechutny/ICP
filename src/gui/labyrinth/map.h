@@ -16,7 +16,8 @@ class Map
 		Block* _freeBlock;
 		Block** _map;
 		int _size;
-		// TODO: onTurn[]
+		int _last_direction;
+		int _last_column;
 
 	public:
 		~Map();
@@ -54,8 +55,10 @@ class Map
 		 *
 		 * @param	int	direction	0 ... right, 1 ... up, 2 ... left, 3 ... down
 		 * @param	int	columnRow	Index of collumn, or row to be shifted
+		 *
+		 * @return	bool	True for success, false for fail (reverse sihft)
 		 */
-		void shift(int direction, int columnRow);
+		bool shift(int direction, int columnRow);
 
 		/**
 		 * Get free block
