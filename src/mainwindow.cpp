@@ -233,6 +233,12 @@ void MainWindow::changeBlock(QPushButton *button,Block* kamen)
 
 	}
 
+
+
+	QTransform transform;
+	QTransform trans = transform.rotate((kamen->getRotation()) * -90);
+	QPixmap *transPixmap = new QPixmap(pixmap.transformed(trans));
+
 	if(kamen->isOccupied())
 	{
 		Player** players = kamen->getPlayers();
@@ -245,15 +251,11 @@ void MainWindow::changeBlock(QPushButton *button,Block* kamen)
 
 				// paints a midget of icon2 onto icon1
 				icon2 = icon2.scaled(QSize(28,28),Qt::KeepAspectRatio, Qt::SmoothTransformation);
-				QPainter painter(&pixmap);
-				painter.drawPixmap((pixmap.width()-icon2.width())/2,(pixmap.height()-icon2.height())/2,icon2);
+				QPainter painter(transPixmap);
+				painter.drawPixmap((transPixmap->width()-icon2.width())/2,(transPixmap->height()-icon2.height())/2,icon2);
 			}
 		}
 	}
-
-	QTransform transform;
-	QTransform trans = transform.rotate((kamen->getRotation()) * -90);
-	QPixmap *transPixmap = new QPixmap(pixmap.transformed(trans));
 
 	QIcon ButtonIcon(*transPixmap);
 	button->setIcon(ButtonIcon);
