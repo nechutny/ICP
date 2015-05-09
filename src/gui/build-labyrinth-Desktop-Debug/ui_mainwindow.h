@@ -266,7 +266,7 @@ public:
         spinBox_2->setSingleStep(12);
         label_6 = new QLabel(centralWidget);
         label_6->setObjectName(QStringLiteral("label_6"));
-        label_6->setGeometry(QRect(340, 260, 55, 17));
+        label_6->setGeometry(QRect(340, 260, 61, 17));
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(400, 330, 85, 27));

@@ -12,14 +12,14 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	ui->setupUi(this);
 
-	mapa = new Map;
-
-	mapa->generate(VELIKOST, 24);
-
 	hraci[0] = NULL;
 	hraci[1] = NULL;
 	hraci[2] = NULL;
 	hraci[3] = NULL;
+    mapa = new Map;
+
+    //mapa->generate(7, 12);
+
 
 	hrac = 0;
 	posunuto = false;
@@ -243,6 +243,19 @@ void MainWindow::spust()
 		ui->spinBox_2->setVisible(false);
 		ui->pushButton->setVisible(false);
 		prekresli();
+
+        mapa->generate(7, 12);
+
+        int i, j;
+
+        for(i = 0; i < ui->spinBox->value(); i++)
+            for(j = 0; j < ui->spinBox->value(); j++)
+            {
+                m_button[i][j]->setVisible(true);
+            }
+
+
+
 	}
 }
 
@@ -266,6 +279,7 @@ void MainWindow::createField()
 		   m_button[i][j]->setMinimumHeight(i);
 		   m_button[i][j]->setMinimumWidth(j);
 		   m_button[i][j]->setText("");
+           m_button[i][j]->setVisible(false);
 
 
 		   // Connect button signal to appropriate slot
@@ -281,30 +295,35 @@ void MainWindow::createField()
 		h_button[i][0]->setMinimumHeight(i);
 		h_button[i][0]->setMinimumWidth(0);
 		connect(h_button[i][0], SIGNAL(released()), this, SLOT(handleHShift()));
+        h_button[i][0]->setVisible(false);
 
 		h_button[i][1] = new QPushButton("<", this);
 		h_button[i][1]->setGeometry(QRect(QPoint(24 + 24 + 24 + 50*VELIKOST + 24, 8 + 24 + 8 + (2*50*i) + 50), QSize(24, 48)));
 		h_button[i][1]->setMinimumHeight(i);
 		h_button[i][1]->setMinimumWidth(2);
 		connect(h_button[i][1], SIGNAL(released()), this, SLOT(handleHShift()));
+        h_button[i][1]->setVisible(false);
 
 		v_button[i][0] = new QPushButton("\\/", this);
 		v_button[i][0]->setGeometry(QRect(QPoint(24 + 24 + 24 + (2*50*i) + 50, 8), QSize(48, 24)));
 		v_button[i][0]->setMinimumHeight(i);
 		v_button[i][0]->setMinimumWidth(3);
 		connect(v_button[i][0], SIGNAL(released()), this, SLOT(handleVShift()));
+        v_button[i][0]->setVisible(false);
 
 		v_button[i][1] = new QPushButton("/\\", this);
 		v_button[i][1]->setGeometry(QRect(QPoint(24 + 24 + 24 + (2*50*i) + 50, 8 + 24 + 8 + 50*VELIKOST + 8), QSize(48, 24)));
 		v_button[i][1]->setMinimumHeight(i);
 		v_button[i][1]->setMinimumWidth(1);
 		connect(v_button[i][1], SIGNAL(released()), this, SLOT(handleVShift()));
+        v_button[i][1]->setVisible(false);
 	}
 
 	ui->label->setGeometry(QRect(QPoint(35, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(51, 17)));
 	ui->label_2->setGeometry(QRect(QPoint(125, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(51, 17)));
 	ui->label_3->setGeometry(QRect(QPoint(205, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(58, 17)));
 	ui->label_4->setGeometry(QRect(QPoint(305, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(51, 17)));
+
 
 	ui->scoreGreen->setGeometry(QRect(QPoint(90, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(25, 17)));
 	ui->scoreYellow->setGeometry(QRect(QPoint(170, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(25, 17)));
@@ -313,28 +332,32 @@ void MainWindow::createField()
 
 	//ui->scoreBlue->setText(QVariant(24).toString()); //převádění intu na řetězec pro label
 	ui->card->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32,20), QSize(64, 128)));
+    ui->card->setVisible(false);
 	changeCard();
 
 	ui->rotateR->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20), QSize(48, 24)));
 	connect(ui->rotateR, SIGNAL(released()), this, SLOT(handleRotateR()));
 	changeIcon(ui->rotateR, "resources/rotateR.png");
+    ui->rotateR->setVisible(false);
 
 	ui->rotateL->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4 + 48 + 4), QSize(48, 24)));
 	connect(ui->rotateL, SIGNAL(released()), this, SLOT(handleRotateL()));
 	changeIcon(ui->rotateL, "resources/rotateL.png");
+    ui->rotateL->setVisible(false);
 
 	ui->square->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4), QSize(48, 48)));
 	//ui->square->setPixmap( QPixmap( "resources/square.png"));
+    ui->square->setVisible(false);
 
-	ui->spinBox->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, vyska - 76), QSize(48, 24)));
+    ui->spinBox->setGeometry(QRect(QPoint((24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8)/2 + 30, (vyska - 76)/2 + 20), QSize(48, 24)));
 
-	ui->label_5->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, vyska - 98), QSize(48, 24)));
+    ui->label_5->setGeometry(QRect(QPoint((24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8)/2+30, (vyska - 98)/2), QSize(48, 24)));
 
-	ui->spinBox_2->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24, vyska - 76), QSize(48, 24)));
+    ui->spinBox_2->setGeometry(QRect(QPoint((24 + 24 + 24 + (50*VELIKOST))/2 + 5, (vyska - 76)/2 + 20), QSize(48, 24)));
 
-	ui->label_6->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 14, vyska - 98), QSize(68, 24)));
+    ui->label_6->setGeometry(QRect(QPoint((24 + 24 + 24 + (50*VELIKOST))/2, (vyska - 98)/2), QSize(68, 24)));
 
-	ui->pushButton->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 27, vyska - 50), QSize(74, 24)));
+    ui->pushButton->setGeometry(QRect(QPoint((24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 5)/2, (vyska - 50)/2 + 50), QSize(74, 24)));
 
 	ui->checkBox->setGeometry(QRect(QPoint(13, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(20, 20)));
 	ui->checkBox_2->setGeometry(QRect(QPoint(103, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 8), QSize(20, 20)));
