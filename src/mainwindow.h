@@ -1,3 +1,9 @@
+/**
+ * Main window
+ *
+ * @author	Miloslav Smutka - XSMUTK00
+ */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 

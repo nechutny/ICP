@@ -1,3 +1,9 @@
+/**
+ * Main window
+ *
+ * @author	Miloslav Smutka - XSMUTK00
+ */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "stdio.h"
@@ -208,7 +214,6 @@ void MainWindow::prekresli()
 	changeCard();
 
 }
-
 
 /**
  * Create piece of map on the button.
