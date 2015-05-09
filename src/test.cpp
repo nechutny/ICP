@@ -1,3 +1,11 @@
+/**
+ * Test
+ *
+ * @author	Stanislav Nechutný - xnechu01
+ * @author	Miloš Smutka - xsmutk00
+ *
+ */
+
 #include <stdio.h>
 #include "map.h"
 

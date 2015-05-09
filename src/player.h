@@ -3,6 +3,7 @@
  *
  * @author	Stanislav Nechutný - xnechu01
  * @author	Miloš Smutka - xsmutk00
+ *
  */
 #ifndef PLAYER_H
 #define PLAYER_H

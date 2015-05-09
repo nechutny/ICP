@@ -3,6 +3,7 @@
  *
  * @author	Stanislav Nechutný - xnechu01
  * @author	Miloš Smutka - xsmutk00
+ *
  */
 #ifndef BLOCK_H
 #define BLOCK_H
