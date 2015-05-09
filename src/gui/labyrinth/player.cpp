@@ -205,6 +205,12 @@ int Player::getPositionY()
 	return _position_y;
 }
 
+void Player::setPosition(int x, int y)
+{
+	_position_x = x;
+	_position_y = y;
+}
+
 /**
  * Does player win game?
  *

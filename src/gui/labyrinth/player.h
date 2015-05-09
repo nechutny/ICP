@@ -75,6 +75,15 @@ class Player
 		int getPositionX();
 		int getPositionY();
 
+
+		/**
+		 * Set player position (X/Y)
+		 *
+		 * @paream	int	x	X position
+		 * @paream	int	y	Y position
+		 */
+		void setPosition(int x, int y);
+
 		/**
 		 * Does player win game?
 		 *

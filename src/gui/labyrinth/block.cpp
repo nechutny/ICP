@@ -88,6 +88,36 @@ Player** Block::getPlayers()
 }
 
 /**
+ * Set array of players on block
+ *
+ * @param	Player**	players	Pointer to array
+ */
+void Block::setPlayers(Player** players)
+{
+	_players = players;
+}
+
+/**
+ * Inform players about move
+ *
+ * @param	int	x	X positon
+ * @param	int	y	Y position
+ */
+void Block::informMoved(int x, int y)
+{
+	if(isOccupied())
+	{
+		for(int i = 0; i < 4; i++)
+		{
+			if(_players[i] != NULL)
+			{
+				_players[i]->setPosition(x,y);
+			}
+		}
+	}
+}
+
+/**
  * Check, if is any players standing on this block
  *
  * @return	bool	True for player, false = empty
