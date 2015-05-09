@@ -257,7 +257,7 @@ void MainWindow::spust()
                 m_button[i][j]->setVisible(true);
             }
 
-        for(int i = 0; i < ((ui->spinBox->value()) / 2); i++)
+        for(int i = 0; i < ((ui->spinBox->value()) / 2)-1; i++)
         {
             h_button[i][0]->setVisible(true);
             h_button[i][1]->setVisible(true);
@@ -299,7 +299,7 @@ void MainWindow::createField()
 		}
 
 
-	for(int i = 0; i < (VELIKOST / 2); i++)
+	for(int i = 0; i < (VELIKOST / 2)-1; i++)
 	{
 		h_button[i][0] = new QPushButton(">", this);
 		h_button[i][0]->setGeometry(QRect(QPoint(24, 8 + 24 + 8 + (2*50*i) + 50), QSize(24, 48)));
