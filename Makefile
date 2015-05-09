@@ -5,6 +5,11 @@
 all: gui cli
 
 gui:
+	@cd src && qmake -o Makefile && make
+	mv src/labyrinth ./labyrinth2015
+
+#fedora
+fgui:
 	@cd src && qmake-qt5 -o Makefile && make
 	mv src/labyrinth ./labyrinth2015
 
