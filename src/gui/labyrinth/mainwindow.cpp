@@ -230,6 +230,17 @@ void MainWindow::spust()
 
 	if(hraci[3] != NULL)
 		delete hraci[3];
+
+	if (ui->checkBox_3->isChecked())
+	{
+		hraci[pocet_hracu] = new Player(COLOR_RED,mapa);
+		pocet_hracu++;
+	}
+	if (ui->checkBox_4->isChecked())
+	{
+		hraci[pocet_hracu] = new Player(COLOR_BLUE,mapa);
+		pocet_hracu++;
+	}
 	if (ui->checkBox->isChecked())
 	{
 		hraci[pocet_hracu] = new Player(COLOR_GREEN,mapa);
@@ -241,16 +252,8 @@ void MainWindow::spust()
 		hraci[pocet_hracu] = new Player(COLOR_YELLOW,mapa);
 		pocet_hracu++;
 	}
-	if (ui->checkBox_3->isChecked())
-	{
-		hraci[pocet_hracu] = new Player(COLOR_RED,mapa);
-		pocet_hracu++;
-	}
-	if (ui->checkBox_4->isChecked())
-	{
-		hraci[pocet_hracu] = new Player(COLOR_BLUE,mapa);
-		pocet_hracu++;
-	}
+
+
 
 	if(pocet_hracu<2)
 		ui->pushButton->setText("Málo hráčů");
