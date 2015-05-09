@@ -265,7 +265,10 @@ void MainWindow::spust()
             v_button[i][1]->setVisible(true);
         }
 
-
+    ui->rotateL->setVisible(true);
+    ui->rotateR->setVisible(true);
+    ui->square->setVisible(true);
+    ui->card->setVisible(true);
 
 	}
 }
