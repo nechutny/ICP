@@ -3,8 +3,6 @@
 #
 
 # Hack for Fedora (no qmake, but qmake-qt5)
-
-
 ifneq ("$(wildcard /usr/bin/qmake-qt5)","")
 QMAKE = "qmake-qt5"
 else
