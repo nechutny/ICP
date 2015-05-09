@@ -567,12 +567,12 @@ void MainWindow::createField()
 
 	ui->rotateR->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20), QSize(48, 24)));
 	connect(ui->rotateR, SIGNAL(released()), this, SLOT(handleRotateR()));
-	changeIcon(ui->rotateR, "resources/rotateR.png");
+	changeIcon(ui->rotateR, "src/resources/rotateR.png");
 	ui->rotateR->setVisible(false);
 
 	ui->rotateL->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4 + 48 + 4), QSize(48, 24)));
 	connect(ui->rotateL, SIGNAL(released()), this, SLOT(handleRotateL()));
-	changeIcon(ui->rotateL, "resources/rotateL.png");
+	changeIcon(ui->rotateL, "src/resources/rotateL.png");
 	ui->rotateL->setVisible(false);
 
 	ui->square->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8, 20 + 128 + 20 + 24 + 4), QSize(48, 48)));
