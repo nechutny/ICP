@@ -44,6 +44,7 @@ private slots:
 
     void prekresli();
     void spust();
+    void undo();
 
 public:
     QPushButton *m_button[VELIKOST][VELIKOST];

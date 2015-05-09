@@ -327,8 +327,14 @@ void MainWindow::spust()
     ui->rotateR->setVisible(true);
     ui->square->setVisible(true);
     ui->card->setVisible(true);
+    ui->pushButton_2->setVisible(true);
 
 	}
+}
+
+void MainWindow::undo()
+{
+
 }
 
 /**
@@ -436,7 +442,11 @@ void MainWindow::createField()
     ui->checkBox->setGeometry(QRect(QPoint(186, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 5), QSize(20, 20)));
     ui->checkBox_2->setGeometry(QRect(QPoint(286, 8 + 24 + 8 + 50*VELIKOST + 8 + 24 + 5), QSize(20, 20)));
 
+    ui->pushButton_2->setGeometry(QRect(QPoint(24 + 24 + 24 + (50*VELIKOST) + 24 + 24 + 32 + 8 - 18, 20 + 128 + 20 + 24 + 4 + 48 + 4 + 27 + 8), QSize(85, 27)));
+    ui->pushButton_2->setVisible(false);
+
 	connect(ui->pushButton, SIGNAL(released()), this, SLOT(spust()));
+    connect(ui->pushButton_2, SIGNAL(released()), this, SLOT(undo()));
 
 
 }

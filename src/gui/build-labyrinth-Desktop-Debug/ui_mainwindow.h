@@ -52,6 +52,7 @@ public:
     QCheckBox *checkBox_2;
     QCheckBox *checkBox_3;
     QCheckBox *checkBox_4;
+    QPushButton *pushButton_2;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -250,26 +251,26 @@ public:
         square->setGeometry(QRect(390, 190, 85, 27));
         spinBox = new QSpinBox(centralWidget);
         spinBox->setObjectName(QStringLiteral("spinBox"));
-        spinBox->setGeometry(QRect(410, 290, 46, 27));
+        spinBox->setGeometry(QRect(210, 150, 46, 27));
         spinBox->setMinimum(5);
         spinBox->setMaximum(11);
         spinBox->setSingleStep(2);
         spinBox->setValue(7);
         label_5 = new QLabel(centralWidget);
         label_5->setObjectName(QStringLiteral("label_5"));
-        label_5->setGeometry(QRect(400, 270, 55, 17));
+        label_5->setGeometry(QRect(200, 120, 55, 17));
         spinBox_2 = new QSpinBox(centralWidget);
         spinBox_2->setObjectName(QStringLiteral("spinBox_2"));
-        spinBox_2->setGeometry(QRect(350, 290, 46, 27));
+        spinBox_2->setGeometry(QRect(120, 150, 46, 27));
         spinBox_2->setMinimum(12);
         spinBox_2->setMaximum(24);
         spinBox_2->setSingleStep(12);
         label_6 = new QLabel(centralWidget);
         label_6->setObjectName(QStringLiteral("label_6"));
-        label_6->setGeometry(QRect(340, 260, 61, 17));
+        label_6->setGeometry(QRect(110, 120, 61, 17));
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(400, 330, 85, 27));
+        pushButton->setGeometry(QRect(150, 190, 85, 27));
         card = new QPushButton(centralWidget);
         card->setObjectName(QStringLiteral("card"));
         card->setGeometry(QRect(390, 60, 85, 27));
@@ -286,6 +287,9 @@ public:
         checkBox_4 = new QCheckBox(centralWidget);
         checkBox_4->setObjectName(QStringLiteral("checkBox_4"));
         checkBox_4->setGeometry(QRect(260, 290, 21, 22));
+        pushButton_2 = new QPushButton(centralWidget);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setGeometry(QRect(390, 310, 85, 27));
         MainWindow->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -322,6 +326,7 @@ public:
         checkBox_2->setText(QString());
         checkBox_3->setText(QString());
         checkBox_4->setText(QString());
+        pushButton_2->setText(QApplication::translate("MainWindow", "Vr\303\241tit akci", 0));
     } // retranslateUi
 
 };
