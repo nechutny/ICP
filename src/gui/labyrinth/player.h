@@ -59,6 +59,7 @@ class Player
 		 * @return	int	ID of symbol, or 0 for nothing
 		 */
 		int getSymbol();
+		void setSymbol(int symbol);
 
 		/**
 		 * Get player score
@@ -66,6 +67,7 @@ class Player
 		 * @return	int	Player score
 		 */
 		int getScore();
+		void setScore(int score);
 
 		/**
 		 * Get player position (X/Y)

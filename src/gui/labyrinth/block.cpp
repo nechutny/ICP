@@ -97,6 +97,11 @@ void Block::setPlayers(Player** players)
 	_players = players;
 }
 
+void Block::resetPlayers()
+{
+	_players[0] = _players[1] = _players[2] = _players[3] = NULL;
+}
+
 /**
  * Inform players about move
  *

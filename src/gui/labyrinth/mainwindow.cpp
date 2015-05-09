@@ -94,7 +94,7 @@ void MainWindow::handleButton()
 
 
 
-
+		mapa->save(hraci, hrac, posunuto);
 	}
 	else
 	{
@@ -120,6 +120,10 @@ void MainWindow::handleHShift()
 		msgBox.setText("Není možné posunem zrušit předchozí posuv.");
 		msgBox.exec();
 	}
+	else
+	{
+		mapa->save(hraci, hrac, posunuto);
+	}
 	prekresli();
 }
 
@@ -138,6 +142,10 @@ void MainWindow::handleVShift()
 		msgBox.setText("Není možné posunem zrušit předchozí posuv.");
 		msgBox.exec();
 	}
+	else
+	{
+		mapa->save(hraci, hrac, posunuto);
+	}
 
 	prekresli();
 }
@@ -146,6 +154,7 @@ void MainWindow::handleRotateR()
 {
 	//printf("%d\n",mapa->getFreeBlock()->getRotation());
 	mapa->getFreeBlock()->rotateRight();
+	mapa->save(hraci, hrac, posunuto);
 	prekresli();
 	//printf("otoceni");
 	//printf("%d\n\n",mapa->getFreeBlock()->getRotation());
@@ -154,6 +163,7 @@ void MainWindow::handleRotateR()
 void MainWindow::handleRotateL()
 {
 	mapa->getFreeBlock()->rotateLeft();
+	mapa->save(hraci, hrac, posunuto);
 	prekresli();
 }
 
@@ -365,12 +375,21 @@ void MainWindow::spust()
     ui->pushButton_2->setVisible(true);
     ui->save->setVisible(true);
 
+    mapa->save(hraci, hrac, posunuto);
+
 	}
 }
 
 void MainWindow::undo()
 {
-
+	if(mapa->load(hraci, &hrac, &posunuto) == NULL)
+	{
+		QMessageBox msgBox;
+		msgBox.setText("Více akcí nejde vrátit zpět.");
+		msgBox.exec();
+	}
+	prekresli();
+	changeCard();
 }
 
 void MainWindow::load()

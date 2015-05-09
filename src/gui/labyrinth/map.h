@@ -9,6 +9,7 @@
 class Map;
 
 #include "block.h"
+#include "save.h"
 
 class Map
 {
@@ -20,6 +21,7 @@ class Map
 		int _players;
 		int _last_direction;
 		int _last_column;
+		std::stack<saveT*>* _save;
 
 	public:
 		~Map();
@@ -27,7 +29,9 @@ class Map
 		/**
 		 * Save map to file for future load
 		 */
-		void save();
+		void save(Player** players, int onTurn, bool posunul);
+
+		saveT* load(Player** players, int* onTurn, bool* posunul);
 
 		/**
 		 * Generate map

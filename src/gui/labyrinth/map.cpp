@@ -3,11 +3,101 @@
 #include <stdlib.h>
 #include <time.h>
 #include "map.h"
+#include "save.h"
 
 
-void Map::save()
+void Map::save(Player** players, int onTurn, bool posunul)
 {
-	// TODO
+	saveT* sav = (saveT*)calloc(sizeof(saveT),1);
+
+	sav->freeBlockType = _freeBlock->getType();
+	sav->freeBlockRotation = _freeBlock->getRotation();
+	sav->freeBlockSymbol = _freeBlock->getSymbol();
+	int off = 0;
+	for(int i = 0; i < getSize(); i++)
+	{
+		for(int j = 0; j < getSize(); j++)
+		{
+			off = offset(i,j);
+			sav->blockType[off] = _map[off]->getType();
+			sav->blockSymbol[off] = _map[off]->getSymbol();
+			sav->blockRotation[off] = _map[off]->getRotation();
+		}
+	}
+
+	sav->player_on_turn = onTurn;
+	sav->posunul = posunul;
+
+	for(int i = 0; i < 4; i++)
+	{
+		if(players[i] == NULL)
+		{
+			sav->playerPosX[i] = 0;
+			sav->playerPosY[i] = 0;
+			sav->playerScore[i] = 0;
+			sav->playerSymbol[i] = 0;
+			sav->playerColor[i] = 0;
+		}
+		else
+		{
+			sav->playerPosX[i] = players[i]->getPositionX();
+			sav->playerPosY[i] = players[i]->getPositionY();
+			sav->playerScore[i] = players[i]->getScore();
+			sav->playerSymbol[i] = players[i]->getSymbol();
+			sav->playerColor[i] = players[i]->getColor();
+		}
+	}
+
+	_save->push(sav);
+
+}
+
+saveT* Map::load(Player** players, int* onTurn, bool* posunul)
+{
+	if(_save->size() == 0)
+	{
+		printf("Jiz nejde vratit\n");
+		return NULL;
+	}
+	saveT* sav = _save->top();
+	_save->pop();
+
+
+	_freeBlock->setType((block_type)sav->freeBlockType);
+	_freeBlock->setRotation(sav->freeBlockRotation);
+	_freeBlock->setSymbol(sav->freeBlockSymbol);
+	int off = 0;
+	for(int i = 0; i < getSize(); i++)
+	{
+		for(int j = 0; j < getSize(); j++)
+		{
+			off = offset(i,j);
+			_map[off]->setType((block_type)sav->blockType[off]);
+			_map[off]->setSymbol(sav->blockSymbol[off]);
+			_map[off]->setRotation(sav->blockRotation[off]);
+			_map[off]->resetPlayers();
+		}
+	}
+
+	*onTurn = sav->player_on_turn;
+	*posunul = sav->posunul;
+
+	for(int i = 0; i < 4; i++)
+	{
+		printf("Obnovit %d (%d) na [%d,%d]\n", sav->playerSymbol[i], sav->playerColor[i], sav->playerPosX[i], sav->playerPosY[i]);
+		if(sav->playerSymbol[i] != 0)
+		{
+			players[i]->setPosition(sav->playerPosX[i], sav->playerPosY[i]);
+			players[i]->setScore(sav->playerScore[i]);
+			players[i]->setSymbol(sav->playerSymbol[i]);
+			players[i]->setColor((color)sav->playerColor[i]);
+
+			_map[ offset(sav->playerPosX[i], sav->playerPosY[i]) ]->addPlayer(players[i]);
+		}
+
+	}
+
+	return sav;
 }
 
 Map::~Map()
@@ -41,6 +131,8 @@ void Map::incPlayer()
 
 void Map::generate(int N, int symbols)
 {
+	_save = new std::stack<saveT*>;
+
 	_last_direction = 0;
 	_last_column = 0;
 	_symbols = symbols;

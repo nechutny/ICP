@@ -76,6 +76,8 @@ class Block
 		 */
 		void setPlayers(Player** players);
 
+		void resetPlayers();
+
 		/**
 		 * Check, if is any players standing on this block
 		 *

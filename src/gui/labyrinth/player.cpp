@@ -183,6 +183,11 @@ int Player::getSymbol()
 	return _symbol;
 }
 
+void Player::setSymbol(int symbol)
+{
+	_symbol = symbol;
+}
+
 /**
  * Get player score
  *
@@ -191,6 +196,11 @@ int Player::getSymbol()
 int Player::getScore()
 {
 	return _score;
+}
+
+void Player::setScore(int score)
+{
+	_score = score;
 }
 
 /**
