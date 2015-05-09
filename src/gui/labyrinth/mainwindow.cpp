@@ -47,19 +47,19 @@ void MainWindow::handleButton()
 
         for(i = 0; i < 4; i++)
         {
-            if(hraci[i]->getScore() != NULL)
+            if(hraci[i] != NULL)
             {
                 skore = hraci[i]->getScore();
                 sprintf(stringNum, "%d", skore);
 
                 if(hraci[i]->getColor() == COLOR_GREEN)
-                    ui->label->setText(stringNum);
+                    ui->scoreGreen->setText(stringNum);
                 if(hraci[i]->getColor() == COLOR_YELLOW)
-                    ui->label_2->setText(stringNum);
+                    ui->scoreYellow->setText(stringNum);
                 if(hraci[i]->getColor() == COLOR_RED)
-                    ui->label_3->setText(stringNum);
+                    ui->scoreRed->setText(stringNum);
                 if(hraci[i]->getColor() == COLOR_BLUE)
-                    ui->label_4->setText(stringNum);
+                    ui->scoreBlue->setText(stringNum);
             }
         }
 	}
