@@ -1,3 +1,9 @@
+/**
+ * Main
+ *
+ * @author	Miloslav Smutka - XSMUTK00
+ */
+
 #include "mainwindow.h"
 #include <QApplication>
 

@@ -1,3 +1,9 @@
+/**
+ * Main window
+ *
+ * @author	Miloslav Smutka - XSMUTK00
+ */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "stdio.h"
