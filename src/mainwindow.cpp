@@ -54,6 +54,7 @@ MainWindow::~MainWindow()
 void MainWindow::handleButton()
 {//button->minimumHeight(),button->minimumWidth()
 
+	mapa->save(hraci, hrac, posunuto, false);
 	QPushButton *button = (QPushButton *)sender(); //do button si ulozim ten objekt, ktery zavolal slot
 	if(hraci[hrac]->move(button->minimumHeight(),button->minimumWidth()))
 	{
@@ -111,11 +112,10 @@ void MainWindow::handleButton()
 		}
 
 
-
-				mapa->save(hraci, hrac, posunuto, false);
 	}
 	else
 	{
+		mapa->load(hraci, &hrac, &posunuto, false);
 		QMessageBox msgBox;
 		msgBox.setText("Tah na toto pole není možný.");
 		msgBox.exec();
@@ -132,7 +132,7 @@ void MainWindow::handleHShift()
 		return;
 
 	QPushButton *button = (QPushButton *)sender();
-
+	mapa->save(hraci, hrac, posunuto, false);
 
 	posunuto = mapa->shift(button->minimumWidth(),((button->minimumHeight()) * 2)+1);
 	if(!posunuto)
@@ -140,11 +140,9 @@ void MainWindow::handleHShift()
 		QMessageBox msgBox;
 		msgBox.setText("Není možné posunem zrušit předchozí posuv.");
 		msgBox.exec();
+		mapa->load(hraci, &hrac, &posunuto, false);
 	}
-	else
-	{
-		mapa->save(hraci, hrac, posunuto, false);
-	}
+
 	prekresli();
 }
 
@@ -180,7 +178,7 @@ void MainWindow::handleVShift()
 void MainWindow::handleRotateR()
 {
 	//printf("%d\n",mapa->getFreeBlock()->getRotation());
-	mapa->save(hraci, hrac, posunuto, false);
+	//mapa->save(hraci, hrac, posunuto, false);
 	mapa->getFreeBlock()->rotateRight();
 	prekresli();
 	//printf("otoceni");
@@ -192,7 +190,7 @@ void MainWindow::handleRotateR()
  */
 void MainWindow::handleRotateL()
 {
-	mapa->save(hraci, hrac, posunuto, false);
+	//mapa->save(hraci, hrac, posunuto, false);
 	mapa->getFreeBlock()->rotateLeft();
 	prekresli();
 }
