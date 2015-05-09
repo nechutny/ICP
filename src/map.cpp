@@ -28,6 +28,7 @@ void Map::save(Player** players, int onTurn, bool posunul, bool toFile)
 	sav->player_on_turn = onTurn;
 	sav->posunul = posunul;
 	sav->size = _size;
+	sav->symbols = _symbols;
 
 	for(int i = 0; i < 4; i++)
 	{
@@ -70,7 +71,8 @@ saveT* Map::load(Player** players, int* onTurn, bool* posunul, bool fromFile)
 	{
 		sav = (saveT*)calloc(sizeof(saveT),1);
 		FILE* fp = fopen("save.dat","r");
-		fread(sav, 1, sizeof(saveT), fp);
+		int foo = fread(sav, 1, sizeof(saveT), fp);
+		printf("%d\n", foo);
 		fclose(fp);
 	}
 	else
@@ -89,6 +91,7 @@ saveT* Map::load(Player** players, int* onTurn, bool* posunul, bool fromFile)
 	_freeBlock->setRotation(sav->freeBlockRotation);
 	_freeBlock->setSymbol(sav->freeBlockSymbol);
 	_size = sav->size;
+	_symbols = sav->symbols;
 
 	int off = 0;
 	for(int i = 0; i < getSize(); i++)

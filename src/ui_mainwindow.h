@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.2.1
+** Created by: Qt User Interface Compiler version 5.4.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -280,15 +280,18 @@ public:
         checkBox->setObjectName(QStringLiteral("checkBox"));
         checkBox->setEnabled(true);
         checkBox->setGeometry(QRect(0, 290, 20, 22));
+        checkBox->setChecked(false);
         checkBox_2 = new QCheckBox(centralWidget);
         checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
         checkBox_2->setGeometry(QRect(80, 290, 21, 22));
         checkBox_3 = new QCheckBox(centralWidget);
         checkBox_3->setObjectName(QStringLiteral("checkBox_3"));
         checkBox_3->setGeometry(QRect(160, 290, 21, 22));
+        checkBox_3->setChecked(true);
         checkBox_4 = new QCheckBox(centralWidget);
         checkBox_4->setObjectName(QStringLiteral("checkBox_4"));
         checkBox_4->setGeometry(QRect(260, 290, 21, 22));
+        checkBox_4->setChecked(true);
         pushButton_2 = new QPushButton(centralWidget);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
         pushButton_2->setGeometry(QRect(390, 310, 85, 27));
