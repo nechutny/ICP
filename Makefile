@@ -8,6 +8,10 @@ QMAKE = "qmake-qt5"
 else
 QMAKE = "qmake"
 endif
+ifneq ("$(wildcard /usr/local/share/Qt-5.2.1/5.2.1/gcc_64/bin/qmake)","")
+QMAKE = "/usr/local/share/Qt-5.2.1/5.2.1/gcc_64/bin/qmake"
+endif
+
 
 # all actions
 all: gui cli
